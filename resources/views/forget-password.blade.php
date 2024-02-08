@@ -1,0 +1,34 @@
+@extends('layout.layout-common')
+
+@section('space-work')
+<h1>Forget Password</h1>
+
+@if($errors->any())
+    @foreach ($errors->all() as $error )
+        <p style="color:red;">{{$error}}</p>
+    @endforeach
+@endif
+
+@if (Session::has('error'))
+    <p style="color:red">{{Session::get('error')}}</p>
+@endif
+@if (Session::has('success'))
+    <p style="color:red">{{Session::get('success')}}</p>
+@endif
+    <form action="{{route('forgetPassword')}}" method="post">
+        @csrf
+
+        <input type="email" name="email" placeholder="Enter Email">
+        <br><br>
+        
+        
+
+        <input type="submit" value="Forget Password">
+
+        <a href="/forget-password">Forget Password</a>
+    </form>
+
+  
+
+@endsection
+
