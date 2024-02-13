@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +37,29 @@ Route::post('/forget-password', [AuthController::class, 'forgetPasswordLoad'])->
 
 Route::group(['middleware'=>['web', 'checkAdmin']],function(){
     Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard']);
+    Route::post('addSubject', [AdminController::class, 'addSubject'])->name('addSubject');
 });
 Route::group(['middleware'=>['web', 'checkStudent']],function(){
     Route::get('/dashboard', [AuthController::class, 'loadDashboard']);
 });
 
+
+
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
+Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
+Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
+Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
+Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+
+use App\Http\Controllers\TestController;
+
+Route::middleware(['auth'])->group(function () {
+    // Use route model binding for implicit binding
+    Route::get('courses/{course}/tests', [TestController::class, 'index'])->name('courses.tests.index');
+    Route::get('courses/{course}/tests/create', [TestController::class, 'create'])->name('courses.tests.create');
+    Route::post('courses/{course}/tests', [TestController::class, 'store'])->name('courses.tests.store');
+    Route::get('courses/{course}/tests/{test}/edit', [TestController::class, 'edit'])->name('courses.tests.edit');
+    Route::put('courses/{course}/tests/{test}', [TestController::class, 'update'])->name('courses.tests.update');
+    Route::delete('courses/{course}/tests/{test}', [TestController::class, 'destroy'])->name('courses.tests.destroy');
+});

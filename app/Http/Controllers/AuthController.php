@@ -56,21 +56,32 @@ class AuthController extends Controller
 
     public function userLogin(Request $request){
         $request->validate([
-            'email'=>'email|required',
-            'password'=>'required|min:6'
+            'email' => 'email|required',
+            'password' => 'required|min:6'
         ]);
-
+    
         $userCredential = $request->only('email', 'password');
+    
+        // Check if the email exists
+        $user = User::where('email', $userCredential['email'])->first();
+    
+        if (!$user) {
+            return back()->withErrors(['email' => 'Invalid email or password'])->withInput();
+        }
+    
+        // Check if the password is correct
+        if (!Hash::check($userCredential['password'], $user->password)) {
+            return back()->withErrors(['email' => 'Invalid email or password'])->withInput();
+        }
+    
         if(Auth::attempt($userCredential)){
             if(Auth::user()->is_admin == 1){
                 return redirect('/admin/dashboard');
-            }
-            else{
+            } else {
                 return redirect('/dashboard');
             }
-        }
-        else{
-            return back()->with('error', 'username & password is incorrect');
+        } else {
+            return back()->withErrors(['email' => 'Invalid email or password'])->withInput();
         }
     }
 

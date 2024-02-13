@@ -40,6 +40,7 @@
       // add loading class to html immediately
       document.querySelector('html').classList.add('loading');
     </script><!-- END THEME STYLES -->
+   
   </head>
   <body>
     <!-- .app -->
@@ -63,7 +64,7 @@
               <!-- dropdown-items -->
               <div class="pb-3">
                 <a class="dropdown-item" href="user-profile.html"><span class="dropdown-icon oi oi-person"></span> Profile</a> <a class="dropdown-item" href="auth-signin-v1.html"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
-                <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Help Center</a> <a class="dropdown-item" href="#">Ask Forum</a> <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
+                
               </div><!-- /dropdown-items -->
             </div><!-- /.dropdown-aside -->
           </header><!-- /.aside-header -->

@@ -7,7 +7,7 @@
             <button class="hamburger hamburger-squeeze mr-2" type="button" data-toggle="aside-menu" aria-label="toggle aside menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /toggle aside menu -->
             <a href="index.html">
               
-             <img class="rounded" src="{{url('assets/banner.jpeg')}}" alt="" height="50" width="150">
+             <img class="rounded" src="{{url('assets/abduh.png')}}" alt="" height="50" width="50">
             
             
             </a>
@@ -29,7 +29,7 @@
               
               <!-- .btn-account -->
               <div class="dropdown d-none d-md-flex">
-                <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-avatar user-avatar-md"></span> <span class="account-summary pr-lg-4 d-none d-lg-block"><span class="account-name"> {{ Auth::user()->name }} {{ Auth::user()->given_name }}</span> </span></button> <!-- .dropdown-menu -->
+                <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-avatar user-avatar-md"></span> <span class="account-summary pr-lg-4 d-none d-lg-block"><span class="account-name"> {{ Auth::user()->name }} </span> </span></button> <!-- .dropdown-menu -->
                 <div class="dropdown-menu">
                   <div class="dropdown-arrow d-lg-none" x-arrow=""></div>
                   <div class="dropdown-arrow ml-3 d-none d-lg-block"></div>
@@ -45,7 +45,6 @@
                                         @csrf
                                     </form>
                   
-                  <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Help Center</a> <a class="dropdown-item" href="#">Ask Forum</a> <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
                 
                   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 </div><!-- /.dropdown-menu -->

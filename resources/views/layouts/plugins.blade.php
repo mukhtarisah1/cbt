@@ -1,5 +1,5 @@
-<!-- BEGIN BASE JS -->
-<script src="{{url('assets/vendor/jquery/jquery.min.js')}}"></script>
+<!-- BEGIN BASE JS<script src="{{url('assets/vendor/jquery/jquery.min.js')}}"></script> -->
+    
     <script src="{{url('assets/vendor/popper.js/umd/popper.min.js')}}"></script>
     <script src="{{url('assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->
     <!-- BEGIN PLUGINS JS -->

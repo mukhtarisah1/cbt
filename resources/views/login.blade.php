@@ -11,8 +11,8 @@
   body{
     background: linear-gradient(
       45deg,
-      rgba(9, 151, 38, 0.3),  /* Greenish color with reduced blue and increased green */
-      rgba(9, 151, 38, 0.3)
+      rgba(9, 100, 38, 0.7),  /* Greenish color with reduced blue and increased green */
+      rgba(9, 100, 38, 0.7)
     ),url('assets/images/scott.jpg');
     background-size:cover;
   }
@@ -51,15 +51,15 @@
         
       </header><!-- form -->
       <div class= "form-div">
-        <div class="d-flex mb-3" >
-        <img class="img-fluid" src="{{url('assets/incident.png')}}" alt="incident management" height="200" width="">
+        <div class="d-flex mb-5 mt-5 justify-content-center"  >
+          <img class="img-fluid" src="{{url('assets/abdugbg.png')}}" alt="cbt" height="200" width="60%">
         </div>
         <form class="" method="POST" action="{{ route('userLogin') }}">
           @csrf
           <!-- .form-group -->
           <div class="form-group">
             <div class="form-label-group">
-              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus> <label for="inputUser">Email</label>
+              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus><label for="inputUser">Email</label>
               @error('email')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -87,12 +87,12 @@
           <!-- .form-group -->
           <div class="form-group text-center">
             <div class="custom-control custom-control-inline custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="remember-me"> <label class="custom-control-label" for="remember-me">Keep me signed in</label>
+              
             </div>
           </div><!-- /.form-group -->
           <!-- recovery links -->
           <div class="text-center pt-3">
-            <a href="/password/reset" class="link">Forgot Username?</a> <span class="mx-2">·</span> <a href="/password/reset" class="link">Forgot Password?</a>
+             <a href="/password/reset" class="link">Forgot Password?</a>
           </div><!-- /recovery links -->
         </form><!-- /.auth-form -->
        
