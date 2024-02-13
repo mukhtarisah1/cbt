@@ -23,7 +23,7 @@
                   <a href="#" class="menu-link"><span class="menu-icon far fa-file "></span> <span class="menu-text">Manage Test</span></a> <!-- child menu -->
                   <ul class="menu">
                     <li class="menu-item">
-                      <a href="" class="menu-link">Create New</a>
+                      <a href="{{route('createView.index')}}" class="menu-link">Create New</a>
                     </li>
                     <li class="menu-item">
                       <a href="" class="menu-link">View All Tests </a>

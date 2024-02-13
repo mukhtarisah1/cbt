@@ -22,6 +22,10 @@
                             <label for="subject" >Name:</label>
                             <input type="text" class="form-control" name="name" value="{{$course->name}}" required>
                         </div>
+                        <div class="form-group">
+                            <label for="subject" >Slug:</label>
+                            <input type="text" class="form-control" name="slug" value="{{$course->slug}}" required>
+                        </div>
                         
                         <div class="form-group">
                             <label for="description">Description:</label>

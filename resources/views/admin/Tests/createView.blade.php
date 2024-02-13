@@ -13,7 +13,7 @@
     @endif
 <div class="card">
     <div class="card-body">
-    <a href="{{ route('courses.create') }}"><h6>Create New Course</h6></a>
+    <a href="#" ><h6>Create a Test under a course</h6></a>
     <table class="table table-striped table-hover table-bordered">
         <tr>
             
@@ -36,13 +36,7 @@
                 
                 <!-- Add other fields as needed -->
                 <td>
-                    <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
-                        
-                        <a href="{{ route('courses.edit', $course->id) }}"><i class="fa fa-pencil-alt"></i> <span class="sr-only">Edit</span></a>
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-icon btn-secondary" onclick="return confirm('Are you sure you want to delete this record?')" type="submit"><i class="far fa-trash-alt"></i> <span class="sr-only">Remove</span></button>
-                    </form>
+                    <a href="{{route('courses.tests.create', $course->id)}}">Add Test</a>
                 </td>
             </tr>
         @empty

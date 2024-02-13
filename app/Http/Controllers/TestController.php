@@ -12,20 +12,21 @@ class TestController extends Controller
     {
         $tests = $course->tests;
 
-        return view('tests.index', compact('course', 'tests'));
+        return view('admin.tests.index', compact('course', 'tests'));
     }
 
     public function create(Course $course)
     {
-        return view('tests.create', compact('course'));
+        //dd($course->name);
+        return view('admin.tests.create', compact('course'));
     }
 
     public function store(Request $request, Course $course)
     {
         // Validate and store test data
         $test = $course->tests()->create($request->validate([
-            'title' => 'required|string|max:255',
-            // Add other fields as needed
+            'name' => 'required|string|max:255',
+            'description' =>'required|string'
         ]));
 
         return redirect()->route('courses.tests.index', $course);
@@ -33,7 +34,7 @@ class TestController extends Controller
 
     public function edit(Course $course, Test $test)
     {
-        return view('tests.edit', compact('course', 'test'));
+        return view('admin.tests.edit', compact('course', 'test'));
     }
 
     public function update(Request $request, Course $course, Test $test)
@@ -41,7 +42,7 @@ class TestController extends Controller
         // Validate and update test data
         $test->update($request->validate([
             'title' => 'required|string|max:255',
-            // Add other fields as needed
+            'description' =>'required|string'
         ]));
 
         return redirect()->route('courses.tests.index', $course);
@@ -53,5 +54,10 @@ class TestController extends Controller
         $test->delete();
 
         return redirect()->route('courses.tests.index', $course);
+    }
+
+    public function createView(){
+        $courses = Course::all()->sortBy('name');
+        return view('admin.tests.createView',compact('courses'));
     }
 }

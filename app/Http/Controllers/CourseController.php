@@ -17,7 +17,8 @@ class CourseController extends Controller
     public function create()
     {
         // Show the form to create a new course
-        return view('admin.courses.create');
+        $courses = Course::all()->groupBy('slug');
+        return view('admin.courses.create', compact('courses'));
     }
 
     public function store(Request $request)
@@ -26,6 +27,7 @@ class CourseController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
+            'slug' => 'required|string',
         ]);
 
         Course::create($request->all());
@@ -47,6 +49,7 @@ class CourseController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
+            'slug' => 'required|string',
         ]);
 
         $course = Course::findOrFail($id);

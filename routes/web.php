@@ -55,11 +55,12 @@ Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('cour
 use App\Http\Controllers\TestController;
 
 Route::middleware(['auth'])->group(function () {
-    // Use route model binding for implicit binding
-    Route::get('courses/{course}/tests', [TestController::class, 'index'])->name('courses.tests.index');
+    
+    Route::get('create/tests', [TestController::class, 'createView'])->name('createView.index');
+    Route::get('courses/{course}/tests', [TestController::class, 'index'])->name('courses.tests.index');  
     Route::get('courses/{course}/tests/create', [TestController::class, 'create'])->name('courses.tests.create');
     Route::post('courses/{course}/tests', [TestController::class, 'store'])->name('courses.tests.store');
     Route::get('courses/{course}/tests/{test}/edit', [TestController::class, 'edit'])->name('courses.tests.edit');
     Route::put('courses/{course}/tests/{test}', [TestController::class, 'update'])->name('courses.tests.update');
     Route::delete('courses/{course}/tests/{test}', [TestController::class, 'destroy'])->name('courses.tests.destroy');
-});
+}); 
