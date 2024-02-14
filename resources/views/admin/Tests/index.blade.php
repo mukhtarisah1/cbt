@@ -17,6 +17,7 @@
     @empty
         
     @endforelse
+    <!-- some thing -->
     <table class="table">
         <thead>
             <tr>
