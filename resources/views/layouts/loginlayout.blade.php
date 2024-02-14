@@ -7,12 +7,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
     <!-- Begin SEO tag -->
-    <title> Sign In | Incident Management Solution </title>
+    <title> Sign In | Online Examination Platform </title>
     <meta property="og:title" content="Sign In">
     <meta name="author" content="content oasis">
     <meta property="og:locale" content="en_US">
-    <meta name="description" content="Atipsom software">
-    <meta property="og:description" content="Atipsom software">
+    <meta name="description" content="CBT software">
+    <meta property="og:description" content="CBT software">
     <link rel="canonical" href="index.html">
     <meta property="og:url" content="index.html">
     <meta property="og:site_name" content="Atipsom - software ">
