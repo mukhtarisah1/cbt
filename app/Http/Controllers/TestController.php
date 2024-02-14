@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
-    public function index(Course $course)
+    public function index()
     {
-        $tests = $course->tests;
-
-        return view('admin.tests.index', compact('course', 'tests'));
+        $courses = Course::with('tests')->get();
+        ///dd($courses);
+        return view('admin.tests.index', compact('courses'));
     }
 
     public function create(Course $course)
