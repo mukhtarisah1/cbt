@@ -3,9 +3,7 @@
 @extends('layouts.layout')
 
 @section('content')
-    <div>
-        welcome {{ Auth::user()->name }}
-    </div>
+    
     <div class="row justify-content-md-center">
         <div class="col col-md-8">
             <div id="base-style" class="card">
