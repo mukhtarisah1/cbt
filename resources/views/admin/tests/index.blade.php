@@ -28,7 +28,7 @@
                                         @if($course->tests->count() > 0)
                                             <ul>
                                                 @foreach($course->tests as $test)
-                                                    <li class="mb-3">{{ $test->name }}</li>
+                                                    <li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add questions">{{ $test->name }}</li>
                                                 @endforeach
                                             </ul>
                                         @else
@@ -44,7 +44,8 @@
                                                             <a  href="{{ route('courses.tests.edit',['course' => $course->id, 'test' => $test->id]) }}" ><i class="fa fa-pencil-alt"></i></a>
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary" onclick="return confirm('Are you sure?')"><i class="far fa-trash-alt"></i> <span class="sr-only">Remove</span></button>
+                                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                            <i class="far fa-trash-alt"></i> <span class="sr-only">Remove</span></button>
                                                         </form>
                                                     </div>
                                                     

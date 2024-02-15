@@ -27,7 +27,7 @@ class TestController extends Controller
         $test = $course->tests()->create($request->validate([
             'name' => 'required|string|max:255',
             'description' =>'required|string',
-            'duration' =>'required|number'
+            'duration' =>'required|numeric'
         ]));
 
         return redirect()->route('courses.tests.index', $course);

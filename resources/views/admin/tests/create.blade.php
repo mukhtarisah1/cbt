@@ -15,15 +15,15 @@
                         @csrf
                         <div class="form-group">
                             <label for="subject" >Name:</label>
-                            <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="Enter Test name" required>
+                            <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="Enter Test name" autocomplete="off" required>
                         </div>
                         <div class="form-group">
-                            <label for="subject" >Duration (minutes):</label>
-                            <input type="number" class="form-control" name="name" value="{{old('duration')}}" placeholder="Enter duration in minutes" required>
+                            <label for="subject" >Duration (minutes): </label>
+                            <input type="number" class="form-control" name="duration" value="{{old('duration')}}" placeholder="Enter duration in minutes" autocomplete="off" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="description">Description:</label>
+                            <label for="description">Description: </label>
                             <textarea class="form-control" placeholder="Enter Short Description" name="description" required>{{ old('description') }}</textarea>
                         </div>
                         
@@ -36,7 +36,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">List of all Tests for {{$course->name}}</h5>
-                    @if($course->tests->count()>0)
+                    @if($course->tests->count() > 0)
                     <table class="w-100">
                         <thead>
                             <tr>
