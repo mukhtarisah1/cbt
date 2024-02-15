@@ -21,7 +21,7 @@
             </div><!-- /.top-bar-item -->
             <!-- .top-bar-item -->
             <div class="top-bar-item top-bar-item-full">
-              
+            <h6 >Online Examination Platform</h6>
             </div><!-- /.top-bar-item -->
             <!-- .top-bar-item -->
             <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
@@ -34,13 +34,11 @@
                   <div class="dropdown-arrow d-lg-none" x-arrow=""></div>
                   <div class="dropdown-arrow ml-3 d-none d-lg-block"></div>
                   
-                  <h6 class="dropdown-header d-none d-md-block d-lg-none"> Beni Arisandi </h6><a class="dropdown-item" href="/home"><span class="dropdown-icon oi oi-person"></span> Profile</a> <a class="dropdown-item" href="{{ route('logout') }}"
+                  <h6 class="dropdown-header d-none d-md-block d-lg-none"> Beni Arisandi </h6><a class="dropdown-item" href="#"><span class="dropdown-icon oi oi-person"></span> Profile</a> <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><span class="dropdown-icon oi oi-account-logout"></span>
                                         {{ __('Logout') }}
                                     </a>
-                  
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="get" class="d-none">
                                         @csrf
                                     </form>

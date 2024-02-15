@@ -12,7 +12,7 @@
                     <table class="table table-hover table-striped table-bordered ">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>SN</th>
                                 <th>Course Name</th>
                                 <th>Tests</th>
                                 <th>Action</th>
@@ -21,7 +21,7 @@
                         <tbody>
                             @foreach($courses as $course)
                                 <tr>
-                                    
+                                    <td>{{$loop->iteration}}</td>
                                     <td>{{ $course->name }}</td>
                                     
                                     <td>

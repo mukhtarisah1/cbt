@@ -42,6 +42,7 @@
                             <tr>
                                 <th >Name</th>
                                 <th >Duration</th>
+                                <th>Questions</th>
                             </tr>
                         </thead>
                         <tbody>
