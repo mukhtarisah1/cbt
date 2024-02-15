@@ -17,6 +17,10 @@
                             <label for="subject" >Name:</label>
                             <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="Enter Test name" required>
                         </div>
+                        <div class="form-group">
+                            <label for="subject" >Duration (minutes):</label>
+                            <input type="number" class="form-control" name="name" value="{{old('duration')}}" placeholder="Enter duration in minutes" required>
+                        </div>
                         
                         <div class="form-group">
                             <label for="description">Description:</label>
@@ -33,13 +37,22 @@
                 <div class="card-body">
                     <h5 class="card-title">List of all Tests for {{$course->name}}</h5>
                     @if($course->tests->count()>0)
-                    <ul>
-                        @foreach($course->tests as $test)
-                            <li>{{ $test->name }}</li>
-                        @endforeach
-                    </ul>
-                        @else
-                        <p>No tests available for {{ $course->name }}</p>
+                    <table class="w-100">
+                        <thead>
+                            <tr>
+                                <th >Name</th>
+                                <th >Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($course->tests as $test)
+                                <tr>
+                                    <td>{{ $test->name }}</td>
+                                    <td >{{ $test->duration }} minutes</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                     @endif
                     
                   
