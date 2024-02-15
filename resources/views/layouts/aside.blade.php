@@ -28,7 +28,7 @@
                     <li class="menu-item">
                       <a href="{{route('courses.tests.index')}}" class="menu-link">View All Tests </a>
                     </li>
-                    
+                    <!-- //this is a comment -->
                     
                   </ul><!-- /child menu -->
                 </li>
