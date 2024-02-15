@@ -26,7 +26,7 @@
                       <a href="{{route('createView.index')}}" class="menu-link">Create New</a>
                     </li>
                     <li class="menu-item">
-                      <a href="" class="menu-link">View All Tests </a>
+                      <a href="{{route('courses.tests.index')}}" class="menu-link">View All Tests </a>
                     </li>
                     
                     
