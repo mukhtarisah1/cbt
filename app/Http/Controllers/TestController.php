@@ -32,6 +32,12 @@ class TestController extends Controller
 
         return redirect()->route('courses.tests.index', $course);
     }
+    
+
+    public function show(Course $course, Test $test)
+    {
+        return view('admin.tests.show', compact('course', 'test'));
+    }
 
     public function edit(Course $course, Test $test)
     {

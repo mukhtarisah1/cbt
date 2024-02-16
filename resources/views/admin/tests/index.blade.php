@@ -15,7 +15,8 @@
                                 <th>SN</th>
                                 <th>Course Name</th>
                                 <th>Tests</th>
-                                <th>Action</th>
+                                <th>Question</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,7 +29,18 @@
                                         @if($course->tests->count() > 0)
                                             <ul>
                                                 @foreach($course->tests as $test)
-                                                    <li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add questions">{{ $test->name }}</li>
+                                                    <a href="{{route('courses.tests.questions.create', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">{{ $test->name }}</li></a>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            No tests available
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($course->tests->count() > 0)
+                                            <ul>
+                                                @foreach($course->tests as $test)
+                                                    <a href="{{route('courses.tests.show', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">Add questions</li></a>
                                                 @endforeach
                                             </ul>
                                         @else

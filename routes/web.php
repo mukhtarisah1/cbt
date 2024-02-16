@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
-
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\TestQuestionController;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,9 +17,7 @@ use App\Http\Controllers\CourseController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 Route::get('/register', [AuthController::class, 'loadRegister']);
 Route::post('/register', [AuthController::class, 'studentRegister'])->name('studentRegister');
@@ -52,7 +51,8 @@ Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('cours
 Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 
-use App\Http\Controllers\TestController;
+
+
 
 Route::middleware(['auth'])->group(function () {
     
@@ -60,7 +60,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('courses/tests', [TestController::class, 'index'])->name('courses.tests.index');  
     Route::get('courses/{course}/tests/create', [TestController::class, 'create'])->name('courses.tests.create');
     Route::post('courses/{course}/tests', [TestController::class, 'store'])->name('courses.tests.store');
+    Route::get('courses/{course}/tests/{test}', [TestController::class, 'show'])->name('courses.tests.show');
     Route::get('courses/{course}/tests/{test}/edit', [TestController::class, 'edit'])->name('courses.tests.edit');
     Route::put('courses/{course}/tests/{test}', [TestController::class, 'update'])->name('courses.tests.update');
     Route::delete('courses/{course}/tests/{test}', [TestController::class, 'destroy'])->name('courses.tests.destroy');
 }); 
+
+Route::get('courses/{course}/tests/{test}/questions/create', [TestQuestionController::class, 'create']) ->name('courses.tests.questions.create');
+
+Route::post('courses/{course}/tests/{test}/questions', [TestQuestionController::class, 'store'])->name('courses.tests.questions.store');  
+
+Route::get('courses/{course}/tests/{test}/questions/{question}/edit', [TestQuestionController::class, 'edit'])->name('courses.tests.questions.edit');
+
+Route::put('courses/{course}/tests/{test}/questions/{question}', [TestQuestionController::class, 'update'])->name('courses.tests.questions.update');
+
+Route::get('courses/{course}/tests/{test}/questions/{question}/confirm-delete', [TestQuestionController::class, 'confirmDelete'])->name('courses.tests.questions.confirm-delete');
+
+Route::delete('courses/{course}/tests/{test}/questions/{question}', [TestQuestionController::class, 'destroy'])->name('courses.tests.questions.destroy');
