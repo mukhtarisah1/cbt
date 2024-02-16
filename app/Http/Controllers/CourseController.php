@@ -10,7 +10,7 @@ class CourseController extends Controller
     public function index()
     {
         // Retrieve and return all courses
-        $courses = Course::all();
+        $courses = Course::all()->sortBy('name');
         return view('admin.courses.index', ['courses' => $courses]);
     }
 

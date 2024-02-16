@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
+
+use App\Models\Test;
 use App\Models\TestQuestion;
 use Illuminate\Http\Request;
-use App\Models\Course;
-use App\Models\Test;
 
 class TestQuestionController extends Controller
 {
@@ -17,9 +18,7 @@ class TestQuestionController extends Controller
     }
 
     public function store(Request $request, Course $course, Test $test)
-    {
-        // Validation logic for your questions and options
-        
+    { 
         // Assuming you have a TestQuestion model
         TestQuestion::create([
             'test_id' => $test->id,
@@ -33,13 +32,13 @@ class TestQuestionController extends Controller
 
         return redirect()->route('courses.tests.show', [$course, $test])->with('success', 'Question added successfully');
     }
-    public function edit($course, $test, $question)
+    public function edit(Course $course, Test $test, TestQuestion $question)
     {
-        $question = TestQuestion::findOrFail($question);
+        //$question = Question::findOrFail($question);
         return view('admin.test_questions.edit', compact('course', 'test', 'question'));
     }
 
-    public function update(Request $request, $course, $test, $question)
+    public function update(Request $request, Course $course, Test $test, TestQuestion $question)
     {
         $question = TestQuestion::findOrFail($question);
         
@@ -57,7 +56,7 @@ class TestQuestionController extends Controller
         return redirect()->route('courses.tests.show', [$course, $test])->with('success', 'Question updated successfully');
     }
 
-    public function destroy($course, $test, $question)
+    public function destroy(Course $course, Test $test, TestQuestion $question)
     {
         $question = TestQuestion::findOrFail($question);
         $question->delete();

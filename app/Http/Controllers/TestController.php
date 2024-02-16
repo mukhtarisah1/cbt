@@ -36,6 +36,8 @@ class TestController extends Controller
 
     public function show(Course $course, Test $test)
     {
+        $test = Test::with('questions')->find($test->id);
+        //dd($test);
         return view('admin.tests.show', compact('course', 'test'));
     }
 
