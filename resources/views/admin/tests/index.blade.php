@@ -40,7 +40,7 @@
                                         @if($course->tests->count() > 0)
                                             <ul>
                                                 @foreach($course->tests as $test)
-                                                    <a href="{{route('courses.tests.show', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">Add questions</li></a>
+                                                    <a href="{{route('courses.tests.show', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">View questions</li></a>
                                                 @endforeach
                                             </ul>
                                         @else
