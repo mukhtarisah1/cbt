@@ -64,16 +64,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('courses/{course}/tests/{test}/edit', [TestController::class, 'edit'])->name('courses.tests.edit');
     Route::put('courses/{course}/tests/{test}', [TestController::class, 'update'])->name('courses.tests.update');
     Route::delete('courses/{course}/tests/{test}', [TestController::class, 'destroy'])->name('courses.tests.destroy');
+
+
+    Route::get('courses/{course}/tests/{test}/questions/create', [TestQuestionController::class, 'create']) ->name('courses.tests.questions.create');
+    Route::post('courses/{course}/tests/{test}/questions', [TestQuestionController::class, 'store'])->name('courses.tests.questions.store');  
+    Route::get('courses/{course}/tests/{test}/questions/{question}/edit', [TestQuestionController::class, 'edit'])->name('courses.tests.questions.edit');
+    Route::put('courses/{course}/tests/{test}/questions/{question}', [TestQuestionController::class, 'update'])->name('courses.tests.questions.update');
+    Route::get('courses/{course}/tests/{test}/questions/{question}/confirm-delete', [TestQuestionController::class, 'confirmDelete'])->name('courses.tests.questions.confirm-delete');
+    Route::delete('courses/{course}/tests/{test}/questions/{question}', [TestQuestionController::class, 'destroy'])->name('courses.tests.questions.destroy');
 }); 
 
-Route::get('courses/{course}/tests/{test}/questions/create', [TestQuestionController::class, 'create']) ->name('courses.tests.questions.create');
-
-Route::post('courses/{course}/tests/{test}/questions', [TestQuestionController::class, 'store'])->name('courses.tests.questions.store');  
-
-Route::get('courses/{course}/tests/{test}/questions/{question}/edit', [TestQuestionController::class, 'edit'])->name('courses.tests.questions.edit');
-
-Route::put('courses/{course}/tests/{test}/questions/{question}', [TestQuestionController::class, 'update'])->name('courses.tests.questions.update');
-
-Route::get('courses/{course}/tests/{test}/questions/{question}/confirm-delete', [TestQuestionController::class, 'confirmDelete'])->name('courses.tests.questions.confirm-delete');
-
-Route::delete('courses/{course}/tests/{test}/questions/{question}', [TestQuestionController::class, 'destroy'])->name('courses.tests.questions.destroy');

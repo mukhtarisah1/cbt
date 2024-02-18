@@ -29,7 +29,9 @@
                                         @if($course->tests->count() > 0)
                                             <ul>
                                                 @foreach($course->tests as $test)
-                                                    <a href="{{route('courses.tests.questions.create', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">{{ $test->name }}</li></a>
+                                                    <a href="{{route('courses.tests.questions.create', ['course' => $course->id, 'test' => $test->id])}}">
+                                                        <li style="list-style-type: none;" class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">{{ $test->name }}</li>
+                                                    </a>
                                                 @endforeach
                                             </ul>
                                         @else
@@ -40,7 +42,7 @@
                                         @if($course->tests->count() > 0)
                                             <ul>
                                                 @foreach($course->tests as $test)
-                                                    <a href="{{route('courses.tests.show', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">View questions</li></a>
+                                                    <a style="list-style-type: none;" href="{{route('courses.tests.show', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">View questions</li></a>
                                                 @endforeach
                                             </ul>
                                         @else
