@@ -16,16 +16,25 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="subject" >Name:</label>
-                            <input type="text" class="form-control" name="name" value="{{ $test->name}}" placeholder="Enter Test name" autocomplete="off" required>
+                            <input type="text" class="form-control" name="name" value="{{ $test->name}}" placeholder="Enter Test name" autocomplete="off" >
+                            @error('name')
+                                <p style="color: red;">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="subject" >Duration (minutes):</label>
-                            <input type="number" class="form-control" name="name" value="{{ $test->duration}}" placeholder="Enter duration in minutes" autocomplete="off" required>
+                            <input type="number" class="form-control" name="duration" value="{{ $test->duration}}" placeholder="Enter duration in minutes" autocomplete="off" >
+                            @error('duration')
+                                <p style="color: red;">{{$message}}</p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="description">Description:</label>
                             <textarea class="form-control" placeholder="Enter Short Description" name="description" required>{{ $test->description }}</textarea>
+                            @error('description')
+                                <p style="color: red;">{{$message}}</p>
+                            @enderror
                         </div>
                         
                         <button type="submit" class="btn btn-primary">Edit Test</button>

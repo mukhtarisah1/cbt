@@ -48,12 +48,14 @@ class TestController extends Controller
 
     public function update(Request $request, Course $course, Test $test)
     {
-        // Validate and update test data
-        $test->update($request->validate([
-            'title' => 'required|string|max:255',
+        
+        $data= $request->validate([
+            'name' => 'required|string|max:255',
+            'duration' => 'required',
             'description' =>'required|string'
-        ]));
-
+        ]);
+    
+        $test->update( $request->all());
         return redirect()->route('courses.tests.index', $course);
     }
 
