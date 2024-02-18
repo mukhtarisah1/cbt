@@ -29,9 +29,7 @@
                                         @if($course->tests->count() > 0)
                                             <ul>
                                                 @foreach($course->tests as $test)
-                                                    <a href="{{route('courses.tests.questions.create', ['course' => $course->id, 'test' => $test->id])}}">
-                                                        <li style="list-style-type: none;" class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">{{ $test->name }}</li>
-                                                    </a>
+                                                    <a href="{{route('courses.tests.questions.create', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">{{ $test->name }}</li></a>
                                                 @endforeach
                                             </ul>
                                         @else
@@ -42,7 +40,7 @@
                                         @if($course->tests->count() > 0)
                                             <ul>
                                                 @foreach($course->tests as $test)
-                                                    <a style="list-style-type: none;" href="{{route('courses.tests.show', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to view questions">View questions</li></a>
+                                                    <a href="{{route('courses.tests.show', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">View questions</li></a>
                                                 @endforeach
                                             </ul>
                                         @else
@@ -55,10 +53,10 @@
                                                 @foreach($course->tests as $test)
                                                     <div class="mb-1">                        
                                                         <form action="{{ route('courses.tests.destroy', ['course' => $course->id, 'test' => $test->id]) }}" method="POST" style="display: inline;">
-                                                            <a  href="{{ route('courses.tests.edit',['course' => $course->id, 'test' => $test->id]) }}" data-toggle="tooltip" data-placement="top" title="Update Test"><i class="fa fa-pencil-alt"></i></a>
+                                                            <a  href="{{ route('courses.tests.edit',['course' => $course->id, 'test' => $test->id]) }}" ><i class="fa fa-pencil-alt"></i></a>
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="top" title="Delete Test">
+                                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="top" title="Delete">
                                                             <i class="far fa-trash-alt"></i> <span class="sr-only">Remove</span></button>
                                                         </form>
                                                     </div>
