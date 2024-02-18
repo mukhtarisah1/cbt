@@ -34,13 +34,14 @@ class TestQuestionController extends Controller
     }
     public function edit(Course $course, Test $test, TestQuestion $question)
     {
-        //$question = Question::findOrFail($question);
+        //dd('here');
         return view('admin.test_questions.edit', compact('course', 'test', 'question'));
     }
 
     public function update(Request $request, Course $course, Test $test, TestQuestion $question)
     {
-        $question = TestQuestion::findOrFail($question);
+        //dd($question);
+        //$question = TestQuestion::findOrFail($question);
         
         // Validation logic for your questions and options
 
@@ -58,7 +59,7 @@ class TestQuestionController extends Controller
 
     public function destroy(Course $course, Test $test, TestQuestion $question)
     {
-        $question = TestQuestion::findOrFail($question);
+        //$question = TestQuestion::findOrFail($question);
         $question->delete();
 
         return redirect()->route('courses.tests.show', [$course, $test])->with('success', 'Question deleted successfully');

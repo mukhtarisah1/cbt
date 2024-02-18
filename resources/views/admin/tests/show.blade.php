@@ -28,6 +28,40 @@
                             <p>D. {{ $question->option_d }}</p>
                         </div>
                         <p class="correct-answer"><strong>Correct Answer:</strong> {{ $question->correct_answer }}</p>
+                        
+
+                            <a  href="{{ route('courses.tests.questions.edit', [$course, $test, $question]) }}" data-toggle="tooltip" data-placement="top" title="Update question"><i class="fa fa-pencil-alt"></i></a>
+                            
+                        <!-- Button to trigger modal -->
+                        <button type="button" class="btn btn-sm btn-icon" data-toggle="modal" data-target="#deleteModal">
+                        <i class="far fa-trash-alt"></i>
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Confirmation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete this item?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <form action="{{  route('courses.tests.questions.destroy', [ $course, $test, $question]) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
                     </div>
                 @endforeach
             </div>

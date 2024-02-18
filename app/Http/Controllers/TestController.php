@@ -30,7 +30,7 @@ class TestController extends Controller
             'duration' =>'required|numeric'
         ]));
 
-        return redirect()->route('courses.tests.index', $course);
+        return redirect()->route('courses.tests.index', $course)->with('Success', 'Course created successfully');
     }
     
 
