@@ -1,30 +1,61 @@
+@extends('layouts.layout')
 
-<h1>Register</h1>
+@section('content')
+<strong class="text-success"></strong>
 
-@if($errors->any())
-    @foreach ($errors->all() as $error )
-        <p style="color:red;">{{$error}}</p>
-    @endforeach
-@endif
 
-    <form action="{{route('studentRegister')}}" method="post">
-        @csrf
+    <div><h4><strong >Register</strong></h4></div>
+    <div class="card col-md-8">
+        
+        <div class="card-body">
+            
+                <fieldset >
+                    <legend class="border-bottom">Add new Examiner</legend>
+                </fieldset>
+            
+            
+            <form action="{{route('adminRegister')}}" method="post">
+                @csrf
 
-        <input type="text" name="name" placeholder="Enter Name">
-        <br><br>
-        <input type="email" name="email" placeholder="Enter Email">
-        <br><br>
-        <input type="password" name="password" placeholder="Enter Password">
-        <br><br>
-        <input type="password" name="password_confirmation" placeholder="Enter Confirm Password">
-        <br><br>
+                <div class="form-group">
+                    <label for="option_a">Name</label>
+                    <input class="form-control" type="text" name="name" placeholder="Enter Name">
+                    @error('name')
+                    <p style="color:red;">{{$message}}</p>
+                    @enderror
+                </div>
+                
+                <div class="form-group">
+                    <label for="option_a">Email</label>
+                    <input class="form-control" type="email" name="email" placeholder="Enter Email">
+                    @error('email')
+                    <p style="color:red;">{{$message}}</p>
+                    @enderror
+                </div>
+                
+                <div class="form-group">
+                    <label for="option_a">Password</label>
+                    <input class="form-control" type="password" name="password" placeholder="Enter Password">
+                    @error('password')
+                    <p style="color:red;">{{$message}}</p>
+                    @enderror
+                </div>
+                
+                <div class="form-group">
+                    <label for="option_a">Confirm Password</label>
+                    <input class="form-control" type="password" name="password_confirmation" placeholder="Enter Confirm Password">
+                </div>
+                
 
-        <input type="submit" value="Register">
-    </form>
+                <input type="submit" class="btn btn-success" value="Register">
+            </form>
+        </div>
+    </div>
 
     @if (Session::has('success'))
         <p style="color:green">{{Session::get('success')}}</p>
     @endif
 
 
-
+@endsection
+    

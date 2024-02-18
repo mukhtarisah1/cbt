@@ -36,7 +36,7 @@
                   <a href="#" class="menu-link"><span class="menu-icon fa fa-user"></span> <span class="menu-text">Manage Users</span></a> <!-- child menu -->
                   <ul class="menu">
                     <li class="menu-item">
-                      <a href="" class="menu-link">Create New Examiner</a>
+                      <a href="/register" class="menu-link">Create New Examiner</a>
                       <a href="" class="menu-link">Add Student</a>
                     </li>
 

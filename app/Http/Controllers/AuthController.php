@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Url;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 
 class AuthController extends Controller
@@ -20,28 +21,29 @@ class AuthController extends Controller
 
     public function loadRegister(){
         if(Auth::user() && Auth::user()->is_admin== 1){
-            return redirect('/admin/dashboard');
-        }
-        else if(Auth::user() && Auth::user()->is_admin== 0){
-            return redirect('/dashboard');
-        }
         return view('register');
+        }
     }
 
-    public function studentRegister(Request $request){
-        $request->validate([
-            'name' => 'string|required|min:2',
-            'email' => 'string|email|required|max:100|unique:users',
-            'password' => 'string|required|confirmed|min:6'
+    public function adminRegister(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:2',
+            'email' => '|email|required|string|max:100|unique:users',
+            'password' => 'required|string|confirmed|min:6',
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password =Hash::make($request->password);
+        $user->password = Hash::make($request->password);
         $user->save();
 
-        return back()->with('success', 'Your Registration has been succesfull');
+        return back()->with('success', 'Your registration has been successful');
     }
 
     public function loadLogin(){

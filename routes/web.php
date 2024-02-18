@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/register', [AuthController::class, 'loadRegister']);
-Route::post('/register', [AuthController::class, 'studentRegister'])->name('studentRegister');
+Route::post('/register', [AuthController::class, 'adminRegister'])->name('adminRegister');
 
 Route::get('/login', function(){
     return redirect('/');
