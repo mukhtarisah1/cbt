@@ -2,68 +2,53 @@
 
 @section('content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<h3>Add Subject</h3>
+<h3 class="border-bottom text-success">DashBoard</h3>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSubjectModel">
- Add Subject
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="addSubjectModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-
-   <form  id="addSubject">
-    @csrf
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Subject</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <label for="">Subject</label>
-            <input type="text" class="form-control" name="subject" id="" placeholder="Enter Subject name" required>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Add</button>
-        </div>
-        </div>
-   </form>
-
-  </div>
-</div>
-
-<script>
-    $(document).ready(function(){
-        
-        $("#addSubject").submit(function(e){
-            e.preventDefault();
-            var formData = $(this).serialize();       
-            $.ajax(
-                {
-                    url:"{{ route('addSubject') }}",
-                    type:"POST",
-                    data:formData,
-                    headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(data) {
-                    if(data.success == true){
-                        
-                        location.reload();
-                    }
-                    else{
-                       //alert(data.msg);              
-                      }
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-                });
-        });
-    });
-</script>
+<div class="metric-row">
+                    <div class="col-lg-9">
+                      <div class="metric-row metric-flush">
+                        <!-- metric column -->
+                        <div class="col">
+                          <!-- .metric -->
+                          <a href="#" class="metric metric-bordered align-items-center">
+                            <h2 class="metric-label"> Examiners </h2>
+                            <p class="metric-value h3">
+                              <sub><i class="oi oi-people"></i></sub> <span class="value">8</span>
+                            </p>
+                          </a> <!-- /.metric -->
+                        </div><!-- /metric column -->
+                        <!-- metric column -->
+                        <div class="col">
+                          <!-- .metric -->
+                          <a href="#" class="metric metric-bordered align-items-center">
+                            <h2 class="metric-label"> courses </h2>
+                            <p class="metric-value h3">
+                              <sub><i class="oi oi-fork"></i></sub> <span class="value">12</span>
+                            </p>
+                          </a> <!-- /.metric -->
+                        </div><!-- /metric column -->
+                        <!-- metric column -->
+                        <div class="col">
+                          <!-- .metric -->
+                          <a href="#" class="metric metric-bordered align-items-center">
+                            <h2 class="metric-label"> Tests </h2>
+                            <p class="metric-value h3">
+                              <sub><i class="fa fa-tasks"></i></sub> <span class="value">64</span>
+                            </p>
+                          </a> <!-- /.metric -->
+                        </div><!-- /metric column -->
+                      </div>
+                    </div><!-- metric column -->
+                    <div class="col-lg-3">
+                      <!-- .metric -->
+                      <a href="#" class="metric metric-bordered">
+                        <div class="metric-badge">
+                          <span class="badge badge-lg badge-success"><span class="oi oi-media-record pulse mr-1"></span> Students </span>
+                        </div>
+                        <p class="metric-value h3">
+                          <sub><i class="oi oi-timer"></i></sub> <span class="value">8</span>
+                        </p>
+                      </a> <!-- /.metric -->
+                    </div><!-- /metric column -->
+                  </div>
 @endsection
