@@ -22,6 +22,8 @@ class AuthController extends Controller
     public function loadRegister(){
         if(Auth::user() && Auth::user()->is_admin== 1){
         return view('register');
+        }else{
+            return redirect('student.dashboard');
         }
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestQuestionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +28,7 @@ Route::get('/login', function(){
 });
 
 Route::get('/', [AuthController::class, 'loadLogin']);
-Route::post('/login', [AuthController::class, 'userLogin'])->name('userLogin');
+Route::post('/login', [AuthController::class, 'userLogin'])->name('login'); 
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -74,3 +75,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('courses/{course}/tests/{test}/questions/{question}', [TestQuestionController::class, 'destroy'])->name('courses.tests.questions.destroy');
 }); 
 
+
+
+Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
+Route::post('/students', [StudentController::class, 'store'])->name('students.store');
+Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name('students.edit');
+Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
+Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');

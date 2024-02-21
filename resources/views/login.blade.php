@@ -54,7 +54,7 @@
         <div class="d-flex mb-5 mt-5 justify-content-center"  >
           <img class="img-fluid" src="{{url('assets/abdugbg.png')}}" alt="cbt" height="200" width="60%">
         </div>
-        <form class="" method="POST" action="{{ route('userLogin') }}">
+        <form class="" method="POST" action="{{ route('login') }}">
           @csrf
           <!-- .form-group -->
           <div class="form-group">
