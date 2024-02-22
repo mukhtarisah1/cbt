@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('is_admin')->default(0);
             $table->string('reg_no')->unique()->nullable();
             $table->integer('level')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

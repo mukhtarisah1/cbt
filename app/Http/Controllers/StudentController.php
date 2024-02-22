@@ -9,7 +9,8 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = User::where('is_admin', 0)->groupBy('level');
+        $students = User::where('is_admin', 0)->get();
+        //dd($students);
         return view('students.index', compact('students'));
     }
 
@@ -20,38 +21,41 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $data= $request->validate([
             'name' => 'required',
-            'reg_no' => 'required|unique:students',
-            'level' => 'required',
+            'reg_no' => 'required|unique:users',
+            'level' => 'required|numeric',
+            'email' => 'required',
+            
         ]);
 
-        User::create($request->all());
+        User::create($data);
 
         return redirect()->route('students.index')->with('success', 'Student added successfully');
     }
 
-    public function edit(User $user)
+    public function edit(User $student)
     {
         return view('students.edit', compact('student'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $student)
     {
-        $request->validate([
+       $data= $request->validate([
             'name' => 'required',
-            'reg_no' => 'required|unique:students,reg_no,' . $user->id,
-            'level' => 'required',
+            'reg_no' => 'required|unique:users,reg_no,' . $student->id,
+            'level' => 'required|numeric',
+            'email' => 'required',
         ]);
 
-        $user->update($request->all());
+        $student->update($data);
 
         return redirect()->route('students.index')->with('success', 'Student updated successfully');
     }
 
-    public function destroy(User $user)
+    public function destroy(User $student)
     {
-        $user->delete();
+        $student->delete();
 
         return redirect()->route('students.index')->with('success', 'Student deleted successfully');
     }

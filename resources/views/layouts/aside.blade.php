@@ -37,7 +37,9 @@
                   <ul class="menu">
                     <li class="menu-item">
                       <a href="/register" class="menu-link">Create New Examiner</a>
-                      <a href="" class="menu-link">Add Student</a>
+                      <a href="" class="menu-link">All Examiners</a>
+                      <a href="{{route('students.create')}}" class="menu-link">Add Student</a>
+                      <a href="{{route('students.index')}}" class="menu-link">All Student</a>                      
                     </li>
 
                   </ul><!-- /child menu -->

@@ -1,5 +1,5 @@
 <!-- resources/views/students/index.blade.php -->
-@extends('layouts.app')
+@extends('layouts.layout')
 
 @section('content')
     <h1>Students</h1>
@@ -17,7 +17,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Reg No</th>
-                <th>Venue</th>
+                <th>Level</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,7 +27,7 @@
                     <td>{{ $student->id }}</td>
                     <td>{{ $student->name }}</td>
                     <td>{{ $student->reg_no }}</td>
-                    <td>{{ $student->venue }}</td>
+                    <td>Level {{ $student->level }}</td>
                     <td>
                         <a href="{{ route('students.edit', $student) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('students.destroy', $student) }}" method="POST" style="display: inline;">

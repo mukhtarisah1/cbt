@@ -90,7 +90,7 @@ class AuthController extends Controller
     }
 
     public function loadDashboard(){
-        return view('student.dashboard');
+        return view('students.dashboard');
     }
 
     public function adminDashboard(){

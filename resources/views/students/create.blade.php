@@ -12,7 +12,7 @@
         <div class="card-body">
             
                 <fieldset >
-                    <legend class="border-bottom">Add new Examiner</legend>
+                    <legend class="border-bottom text-success">Add new Student</legend>
                 </fieldset>
             
             
@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <label for="option_a">Name</label>
-                    <input class="form-control" type="text" name="name" placeholder="Enter Name">
+                    <input class="form-control" type="text" name="name" placeholder="Enter Student Name" autocomplete="off">
                     @error('name')
                     <p style="color:red;">{{$message}}</p>
                     @enderror
@@ -29,23 +29,26 @@
                 
                 <div class="form-group">
                     <label for="option_a">Email</label>
-                    <input class="form-control" type="email" name="email" placeholder="Enter Email">
+                    <input class="form-control" type="email" name="email" placeholder="Enter Student Email" autocomplete="off">
                     @error('email')
                     <p style="color:red;">{{$message}}</p>
                     @enderror
                 </div>
                 
                 <div class="form-group">
-                    <label for="option_a">Password</label>
-                    <input class="form-control" type="password" name="password" placeholder="Enter Password">
-                    @error('password')
+                    <label for="option_a">Registration Number</label>
+                    <input class="form-control" type="text" name="reg_no" placeholder="Enter Student Registration Number" >
+                    @error('reg_no')
                     <p style="color:red;">{{$message}}</p>
                     @enderror
                 </div>
                 
                 <div class="form-group">
-                    <label for="option_a">Confirm Password</label>
-                    <input class="form-control" type="password" name="password_confirmation" placeholder="Enter Confirm Password">
+                    <label for="option_a">Level</label>
+                    <input class="form-control" type="number" name="level" placeholder="Enter Student Level">
+                    @error('level')
+                    <p style="color:red;">{{$message}}</p>
+                    @enderror
                 </div>
                 
 
