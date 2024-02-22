@@ -85,7 +85,7 @@ class StudentController extends Controller
         } catch (QueryException $e) {
             // Check if the exception is related to duplicate entry
             if ($e->getCode() == 23000) {
-                return redirect()->back()->with('error', 'Error: Duplicate entry found. Please ensure there are no duplicate entries in your Excel/CSV file.');
+                return redirect()->back()->with('error', 'Error: Duplicate entry found. Please ensure there are no duplicate entries or already inserted entries in your Excel/CSV file.');
             }
     
             // Handle other database-related exceptions
