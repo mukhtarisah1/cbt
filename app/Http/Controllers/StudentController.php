@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
 use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
@@ -70,48 +72,29 @@ class StudentController extends Controller
     }
     public function import(Request $request)
     {
-        //dd('here');
-        $request->validate([
-            'excel_file' => 'required|mimes:xlsx,csv',
-        ]);
-        Excel::import(new StudentsImport, $request->file('excel_file'));
-
-        return redirect()->back()->with('success', 'Students imported successfully');
+        try {
+            $request->validate([
+                'excel_file' => 'required|mimes:xlsx,csv',
+            ]);
+    
+            Excel::import(new StudentsImport, $request->file('excel_file'));
+    
+            return redirect()->back()->with('success', 'Students imported successfully');
+        } catch (NoTypeDetectedException $e) {
+            return redirect()->back()->with('error', 'Error: No type detected. Please ensure you are uploading a valid Excel file (xlsx) or CSV file.');
+        } catch (QueryException $e) {
+            // Check if the exception is related to duplicate entry
+            if ($e->getCode() == 23000) {
+                return redirect()->back()->with('error', 'Error: Duplicate entry found. Please ensure there are no duplicate entries in your Excel/CSV file.');
+            }
+    
+            // Handle other database-related exceptions
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            // Handle other exceptions
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
     }
-        //     public function processCsv(Request $request)
-        // {
-    //     $request->validate([
-        //         'csv_file' => 'required|mimes:csv,txt|max:10240', // Allow only CSV files, max size 10MB
-        //     ]);
+            
+} 
 
-        //     // Process CSV file
-        //     $file = $request->file('csv_file');
-        //     $csvData = array_map('str_getcsv', file($file->path()));
-
-        //     // Validate CSV data
-        //     $csvValidator = Validator::make($csvData, [
-        //         '0' => 'required', // Assuming the name is in the first column
-        //         '1' => ['required', Rule::unique('users', 'reg_no')],
-        //         '2' => 'required|numeric', // Assuming the level is in the third column
-        //         '3' => 'required|email|unique:users', // Assuming the email is in the fourth column
-        //     ]);
-
-        //     if ($csvValidator->fails()) {
-        //         return redirect()->route('students.index')->withErrors($csvValidator);
-        //     }
-
-        //     // Process and store CSV data
-        //     foreach ($csvData as $row) {
-        //         $user = User::create([
-        //             'name' => $row[0],
-        //             'reg_no' => $row[1],
-        //             'level' => $row[2],
-        //             'email' => $row[3],
-        //         ]);
-
-        //         // Additional processing if needed
-        //     }
-
-        //     return redirect()->route('students.index')->with('success', 'Students added successfully from CSV');
-        // }
-}

@@ -62,7 +62,7 @@
             @csrf
             <div class="card-body ">
                 <h5 class="card-title text-success">CSV Upload</h5>
-                <p class="card-text">To Upload a list of Students from a CSV document, prepare the format of the document as indicated below.<br>
+                <p class="card-text">To upload a list of students from a CSV document, prepare the document in the structure as indicated below.<br>
                 <table class="table table-bordered">
                     <thead>
                         <tr><th>Name</th><th>Email</th><th>reg_no</th><th>Level</th></tr>
@@ -96,6 +96,9 @@
 
     @if (Session::has('success'))
         <p style="color:green" class="alert alert-success">{{Session::get('success')}}</p>
+    @endif
+    @if (Session::has('error'))
+        <p style="color:green" class="alert alert-danger">{{Session::get('error')}}</p>
     @endif
 
 
