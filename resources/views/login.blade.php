@@ -84,15 +84,10 @@
           <div class="form-group">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
           </div><!-- /.form-group -->
-          <!-- .form-group -->
-          <div class="form-group text-center">
-            <div class="custom-control custom-control-inline custom-checkbox">
-              
-            </div>
-          </div><!-- /.form-group -->
+          
           <!-- recovery links -->
           <div class="text-center pt-3">
-             <a href="/password/reset" class="link">Forgot Password?</a>
+             <a href="#" class="link">Forgot Password?</a>
           </div><!-- /recovery links -->
         </form><!-- /.auth-form -->
        
