@@ -21,16 +21,30 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="option_a">Name</label>
-                        <input class="form-control" type="text" name="name" placeholder="Enter Student Name" autocomplete="off">
-                        @error('name')
+                        <label for="option_a">First Name</label>
+                        <input class="form-control" type="text" name="firstname" placeholder="Enter Student First Name" value="{{old('firstname')}}" autocomplete="off">
+                        @error('first_name')
+                        <p style="color:red;">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="option_a">Last Name</label>
+                        <input class="form-control" type="text" name="lastname" placeholder="Enter Student Last Name" value="{{old('lastname')}}" autocomplete="off">
+                        @error('last_name')
+                        <p style="color:red;">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="option_a">Middle Name</label>
+                        <input class="form-control" type="text" name="middlename" placeholder="Enter Student Middle Name" value="{{old('middlename')}}" autocomplete="off">
+                        @error('middle_name')
                         <p style="color:red;">{{$message}}</p>
                         @enderror
                     </div>
                     
                     <div class="form-group">
                         <label for="option_a">Email</label>
-                        <input class="form-control" type="email" name="email" placeholder="Enter Student Email" autocomplete="off">
+                        <input class="form-control" type="email" name="email" placeholder="Enter Student Email" value="{{old('email')}}" autocomplete="off">
                         @error('email')
                         <p style="color:red;">{{$message}}</p>
                         @enderror
@@ -38,17 +52,17 @@
                     
                     <div class="form-group">
                         <label for="option_a">Registration Number</label>
-                        <input class="form-control" type="text" name="reg_no" placeholder="Enter Student Registration Number" >
+                        <input class="form-control" type="text" name="reg_no" value="{{old('reg_no')}}" placeholder="Enter Student Registration Number" >
                         @error('reg_no')
-                        <p style="color:red;">{{$message}}</p>
+                            <p style="color:red;">{{$message}}</p>
                         @enderror
                     </div>
                     
                     <div class="form-group">
                         <label for="option_a">Level</label>
-                        <input class="form-control" type="number" name="level" placeholder="Enter Student Level">
+                        <input class="form-control" type="number" name="level" value="{{old('level')}}" placeholder="Enter Student Level">
                         @error('level')
-                        <p style="color:red;">{{$message}}</p>
+                            <p style="color:red;">{{$message}}</p>
                         @enderror
                     </div>
                     
@@ -57,7 +71,7 @@
                 </form>
             </div>
         </div>
-        <div class="card col-md-5 ">
+        <div class="card col-md-5 " style="height:75%">
         <form class="" method="POST" action="{{ route('students.import') }}" enctype="multipart/form-data">
             @csrf
             <div class="card-body ">

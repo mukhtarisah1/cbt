@@ -25,7 +25,7 @@ class TestController extends Controller
     {
         // Validate and store test data
         $test = $course->tests()->create($request->validate([
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'description' =>'required|string',
             'duration' =>'required|numeric'
         ]));
@@ -50,7 +50,7 @@ class TestController extends Controller
     {
         
         $data= $request->validate([
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'duration' => 'required',
             'description' =>'required|string'
         ]);

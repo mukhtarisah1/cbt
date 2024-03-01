@@ -16,6 +16,7 @@
                                 <th>Course Name</th>
                                 <th>Tests</th>
                                 <th>Question</th>
+                                <th>Assign Test</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -27,35 +28,39 @@
                                     
                                     <td>
                                         @if($course->tests->count() > 0)
-                                            <ul>
+                                            
                                                 @foreach($course->tests as $test)
                                                     <a href="{{route('courses.tests.questions.create', ['course' => $course->id, 'test' => $test->id])}}">
-                                                        <li style="list-style-type: none;" class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">{{ $test->name }}</li>
+                                                        <span style="list-style-type: none;" class="mb-3 ml-0" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">{{ $test->title }}</span>
                                                     </a>
                                                 @endforeach
-                                            </ul>
+                                            
                                         @else
                                             No tests available
                                         @endif
                                     </td>
+                                    
                                     <td>
                                         @if($course->tests->count() > 0)
-                                            <ul>
+                                            
                                                 @foreach($course->tests as $test)
                                                     <a style="list-style-type: none;" href="{{route('courses.tests.show', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to view questions">View questions</li></a>
                                                 @endforeach
-                                            </ul>
+                                            
                                         @else
                                             No tests available
                                         @endif
                                     </td>
+                                    
+                                    <td><a href="{{ route('courses.tests.assign.create', ['course' => $course->id, 'test' => $test->id]) }}">Add Students</a></td>
+                                    
                                     <td >
                                         @if($course->tests->count() > 0)
-                                            <ul >
+                                            
                                                 @foreach($course->tests as $test)
                                                     <div class="mb-1">                        
                                                         <form action="{{ route('courses.tests.destroy', ['course' => $course->id, 'test' => $test->id]) }}" method="POST" style="display: inline;">
-                                                            <a  href="{{ route('courses.tests.edit',['course' => $course->id, 'test' => $test->id]) }}" data-toggle="tooltip" data-placement="top" title="Delete Test"><i class="fa fa-pencil-alt"></i></a>
+                                                            <a  href="{{ route('courses.tests.edit',['course' => $course->id, 'test' => $test->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit Test"><i class="fa fa-pencil-alt"></i></a>
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-sm btn-icon btn-secondary" onclick="return confirm('Are you sure?')" data-toggle="tooltip" data-placement="top" title="Delete Test">
@@ -64,7 +69,7 @@
                                                     </div>
                                                     
                                                 @endforeach
-                                            </ul>
+                                            
                                         @else
                                             No tests available
                                         @endif

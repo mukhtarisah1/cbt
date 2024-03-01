@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = User::where('is_admin', 0)->get();
+        $students = Student::all();
         //dd($students);
         return view('students.index', compact('students'));
     }
@@ -28,28 +29,31 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        $data= $request->validate([
-            'name' => 'required',
-            'reg_no' => 'required|unique:users',
-            'level' => 'required|numeric',
-            'email' => 'required',
-            
+        //dd($request);
+        $data = $request->validate([
+            'firstname' =>'required',
+            'lastname' =>'required',
+            'level' =>'required|numeric',
+            'reg_no' =>'required',
+            'email' =>'required',
         ]);
-
-        User::create($data);
+        //dd($data);
+        Student::create($data);
 
         return redirect()->route('students.index')->with('success', 'Student added successfully');
     }
 
-    public function edit(User $student)
+    public function edit(Student $student)
     {
         return view('students.edit', compact('student'));
     }
 
-    public function update(Request $request, User $student)
+    public function update(Request $request, Student $student)
     {
        $data= $request->validate([
-            'name' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'middlename' => 'required',
             'reg_no' => 'required|unique:users,reg_no,' . $student->id,
             'level' => 'required|numeric',
             'email' => 'required',
@@ -60,7 +64,7 @@ class StudentController extends Controller
         return redirect()->route('students.index')->with('success', 'Student updated successfully');
     }
 
-    public function destroy(User $student)
+    public function destroy(Student $student)
     {
         $student->delete();
 

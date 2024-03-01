@@ -45,6 +45,11 @@
                   
                 
                   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                  <!---quilbots links--->
+                  <!-- <link href="https://cdn.quilljs.com/1.2.4/quill.snow.css" rel="stylesheet">
+                  <script src="https://cdn.quilljs.com/1.2.4/quill.min.js" type="text/javascript"></script>
+                  <script src="https://cdn.quilljs.com/1.3.6/quill.toolbar.js"></script>
+                  <script src="https://cdn.quilljs.com/1.3.6/quill.imageDropAndPaste.js"></script> -->
                 </div><!-- /.dropdown-menu -->
               </div><!-- /.btn-account -->
             </div><!-- /.top-bar-item -->

@@ -3,6 +3,7 @@
     <script src="{{url('assets/vendor/popper.js/umd/popper.min.js')}}"></script>
     <script src="{{url('assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->
     <!-- BEGIN PLUGINS JS -->
+    
     <script src="{{url('assets/vendor/pace-progress/pace.min.js')}}"></script>
     <script src="{{url('assets/vendor/stacked-menu/js/stacked-menu.min.js')}}"></script>
     <script src="{{url('assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>

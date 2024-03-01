@@ -3,10 +3,12 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TestAssignmentController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestQuestionController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StudentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,6 +75,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('courses/{course}/tests/{test}/questions/{question}/edit', [TestQuestionController::class, 'edit'])->name('courses.tests.questions.edit');
     Route::get('courses/{course}/tests/{test}/questions/{question}/confirm-delete', [TestQuestionController::class, 'confirmDelete'])->name('courses.tests.questions.confirm-delete');
     Route::delete('courses/{course}/tests/{test}/questions/{question}', [TestQuestionController::class, 'destroy'])->name('courses.tests.questions.destroy');
+
+    Route::post('courses/{course}/tests/{test}/assign', [TestAssignmentController::class, 'store']) ->name('courses.tests.assign.store');
+    Route::get('courses/{course}/tests/{test}/assign/create', [TestAssignmentController::class, 'create']) ->name('courses.tests.assign.create');
 }); 
 
 

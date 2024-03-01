@@ -15,7 +15,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="subject" >Name:</label>
-                            <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="Enter Test name" autocomplete="off" required>
+                            <input type="text" class="form-control" name="title" value="{{old('title')}}" placeholder="Enter Test name" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="subject" >Duration (minutes): </label>
