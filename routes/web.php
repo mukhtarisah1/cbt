@@ -7,6 +7,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestAssignmentController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestQuestionController;
+use App\Http\Controllers\LevelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,9 +79,19 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('courses/{course}/tests/{test}/assign', [TestAssignmentController::class, 'store']) ->name('courses.tests.assign.store');
     Route::get('courses/{course}/tests/{test}/assign/create', [TestAssignmentController::class, 'create']) ->name('courses.tests.assign.create');
+
+    //levels routes
+    Route::get('/levels', [LevelController::class, 'index'])->name('levels.index');
+    Route::get('/levels/create', [LevelController::class, 'create'])->name('levels.create');
+    Route::post('/levels', [LevelController::class, 'store'])->name('levels.store');
+    Route::get('/levels/{level}', [LevelController::class, 'show'])->name('levels.show');
+    Route::get('/levels/{level}/edit', [LevelController::class, 'edit'])->name('levels.edit');
+    Route::put('/levels/{level}', [LevelController::class, 'update'])->name('levels.update');
+    Route::delete('/levels/{level}', [LevelController::class, 'destroy'])->name('levels.destroy');
+
 }); 
-
-
+//students related routes
+Route::get('/get-students/{level}', [TestAssignmentController::class, 'getStudents'])->name('get.students');
 
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');

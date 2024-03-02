@@ -14,8 +14,8 @@
                             <tr>
                                 <th>SN</th>
                                 <th>Course Name</th>
-                                <th>Tests</th>
-                                <th>Question</th>
+                                <th>Add Tests Questions</th>
+                                <th>View Question</th>
                                 <th>Assign Test</th>
                                 <th>Actions</th>
                             </tr>
@@ -31,7 +31,7 @@
                                             
                                                 @foreach($course->tests as $test)
                                                     <a href="{{route('courses.tests.questions.create', ['course' => $course->id, 'test' => $test->id])}}">
-                                                        <span style="list-style-type: none;" class="mb-3 ml-0" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">{{ $test->title }}</span>
+                                                        <li style="list-style-type: none;" class="mb-3 ml-0" data-toggle="tooltip" data-placement="left" title="click to add/edit questions">{{ $test->title }}</li></span>
                                                     </a>
                                                 @endforeach
                                             
@@ -44,15 +44,26 @@
                                         @if($course->tests->count() > 0)
                                             
                                                 @foreach($course->tests as $test)
-                                                    <a style="list-style-type: none;" href="{{route('courses.tests.show', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to view questions">View questions</li></a>
+                                                    <a class="border-bottom" style="list-style-type: none;" href="{{route('courses.tests.show', ['course' => $course->id, 'test' => $test->id])}}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to view questions">View questions</li></a>
                                                 @endforeach
                                             
                                         @else
                                             No tests available
                                         @endif
                                     </td>
-                                    
-                                    <td><a href="{{ route('courses.tests.assign.create', ['course' => $course->id, 'test' => $test->id]) }}">Add Students</a></td>
+
+                                    <td>
+                                        @if($course->tests->count() > 0)
+                                                
+                                                @foreach($course->tests as $test)
+                                                    <a style="list-style-type: none;" href="{{ route('courses.tests.assign.create', ['course' => $course->id, 'test' => $test->id]) }}"><li class="mb-3" data-toggle="tooltip" data-placement="left" title="click to add students to test">Add Students</li></a>
+                                                @endforeach
+                                            
+                                        @else
+                                            No tests available
+                                        @endif
+                                    </td>
+                                       
                                     
                                     <td >
                                         @if($course->tests->count() > 0)
