@@ -5,9 +5,10 @@
 @section('content')
     <div class="card">
         <div class="card-body">
+        <a href="{{route('courses.tests.questions.create', ['course' => $course->id, 'test' => $test->id])}}" class="btn btn-success mb-3">Add new question</a>
             <h5 class="card-title">Test Details</h5>
             
-            <p><strong>Test Name:</strong> {{ $test->name }}</p>
+            <p><strong>Test Name:</strong> {{ $test->title }}</p>
             <p><strong>Test Duration:</strong> {{ $test->duration }} minutes</p>
             <p><strong>Test Description:</strong> {{ $test->description }}</p>
         </div>
@@ -16,7 +17,7 @@
     @if($test->questions->count() > 0)
         <div class="card mt-4">
             <div class="card-body">
-                <h5 class="card-title text-success">Questions for {{ $test->name }} Test</h5>
+                <h5 class="card-title text-success">Questions for {{ $test->title }} Test</h5>
                 
                 @foreach($test->questions as $question)
                     <div class="question-container mb-4 border-bottom ">

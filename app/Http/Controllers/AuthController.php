@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PasswordReset;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\carbon;
@@ -87,6 +88,33 @@ class AuthController extends Controller
         } else {
             return back()->withErrors(['email' => 'Invalid email or password'])->withInput();
         }
+    }
+
+    //student login codes 
+    public function loadStudentLogin(){
+        return view('studentLogin'); 
+    }
+    public function studentLogin(Request $request)
+    {
+        $request->validate([
+            'reg_no' => 'required',
+        ]);
+    
+        $userCredential = $request->only('reg_no');
+    
+        // Check if the registration number exists
+        $student = Student::where('reg_no', $userCredential['reg_no'])->first();
+    
+        if (!$student) {
+            return back()->withErrors(['reg_no' => 'User not found'])->withInput();
+        }
+    
+        // Log in the student without requiring a password
+        Auth::guard('students')->login($student);
+        //dd(Auth::guard('students')->user()->firstname);
+        
+    
+        return redirect('/dashboard');
     }
 
     public function loadDashboard(){

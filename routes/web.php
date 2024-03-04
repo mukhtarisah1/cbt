@@ -26,12 +26,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/register', [AuthController::class, 'loadRegister']);
 Route::post('/register', [AuthController::class, 'adminRegister'])->name('adminRegister');
 
-Route::get('/login', function(){
-    return redirect('/');
-});
+// Route::get('/login', function(){
+//     return redirect('/');
+// });
 
 Route::get('/', [AuthController::class, 'loadLogin']);
-Route::post('/login', [AuthController::class, 'userLogin'])->name('login'); 
+Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
+
+Route::get('/studentLogin', [AuthController::class, 'loadStudentLogin'])->name('student.login');
+Route::post('/studentlogin', [AuthController::class, 'studentLogin'])->name('loginStudent'); 
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -42,9 +45,9 @@ Route::group(['middleware'=>['web', 'checkAdmin']],function(){
     Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard']);
     Route::post('addSubject', [AdminController::class, 'addSubject'])->name('addSubject');
 });
-Route::group(['middleware'=>['web', 'checkStudent']],function(){
-    Route::get('/dashboard', [AuthController::class, 'loadDashboard']);
-});
+
+Route::get('/dashboard', [AuthController::class, 'loadDashboard']);
+
 
 
 

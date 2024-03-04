@@ -29,7 +29,14 @@
               
               <!-- .btn-account -->
               <div class="dropdown d-none d-md-flex">
-                <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-avatar user-avatar-md"></span> <span class="account-summary pr-lg-4 d-none d-lg-block"><span class="account-name"> {{ Auth::user()->name }} </span> </span></button> <!-- .dropdown-menu -->
+                <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-avatar user-avatar-md"></span> <span class="account-summary pr-lg-4 d-none d-lg-block">
+                  <span class="account-name">
+                    @if(Auth::check() && Auth::user()->is_admin == 1)
+                        {{ Auth::user()->name }}
+                    @elseif(Auth::guard('students')->check())
+                        {{ Auth::guard('students')->user()->firstname }}
+                    @endif
+                  </span> </span></button> <!-- .dropdown-menu -->
                 <div class="dropdown-menu">
                   <div class="dropdown-arrow d-lg-none" x-arrow=""></div>
                   <div class="dropdown-arrow ml-3 d-none d-lg-block"></div>

@@ -8,7 +8,8 @@
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Add Question to {{ $test->name }}</h5>
+        
+            <h5 class="card-title text-sucsess">Add Question to {{ $test->title }}</h5>
             
             <form action="{{ route('courses.tests.questions.store', [$course, $test]) }}" method="POST">
                 @csrf

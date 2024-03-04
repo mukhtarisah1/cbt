@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use App\Providers\StudentProvider;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,6 +25,26 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->registerPolicies();
+
+        Auth::provider('student', function ($app, array $config) {
+            return new StudentProvider($app['hash'], $config['model']);
+        });
+        Auth::extend('students', function ($app, $name, array $config) {
+            return new Guard(
+                new StudentProvider($app['hash'], $config['model']),
+                $app['session.store']
+            );
+        });
+    }
+
+    protected function guard()
+    {
+        Auth::extend('students', function ($app, $name, array $config) {
+            return new Guard(
+                new StudentProvider($app['hash'], $config['model']),
+                $app['session.store']
+            );
+        });
     }
 }

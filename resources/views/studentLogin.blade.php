@@ -51,36 +51,25 @@
         
       </header><!-- form -->
       <div class= "form-div">
-        <span><a href="{{route('student.login')}}">student login</a></span>
+        <span><a href="/">Admin login</a></span>
         <div class="d-flex mb-5 mt-5 justify-content-center"  >
           <img class="img-fluid" src="{{url('assets/abdugbg.png')}}" alt="cbt" height="200" width="60%">
         </div>
-        <form class="" method="POST" action="{{ route('login') }}">
+        <form class="" method="POST" action="{{ route('loginStudent') }}">
           @csrf
           <!-- .form-group -->
           <div class="form-group">
             <div class="form-label-group">
-              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus><label for="inputUser">Email</label>
-              @error('email')
+              <input id="text1" type="text" class="form-control @error('email') is-invalid @enderror" name="reg_no" value="{{ old('email') }}" autocomplete="email" autofocus><label for="inputUser">Enter Matric number</label>
+              @error('reg_no')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                   </span>
               @enderror
-            </div>
-              
+            </div>  
           </div><!-- /.form-group -->
-          <!-- .form-group -->
-          <div class="form-group">
-            <div class="form-label-group">
-              <input type="password" id="Password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password"> <label for="inputPassword">Password</label>
-              @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-              @enderror
-            </div>
-          
-          </div><!-- /.form-group -->
+
+         
           <!-- .form-group -->
           <div class="form-group">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
