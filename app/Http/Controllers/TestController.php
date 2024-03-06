@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Test;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -74,6 +75,34 @@ class TestController extends Controller
 
 
     public function startTestInstructions(Test $test){
-        return view('students.startTest', compact('test'));
+        return view('students.startTestInstructions', compact('test'));
     } 
+
+public function startTest(Test $test){
+    $questions = $test->questions;
+
+    // Calculate the end time based on the test duration
+    $endTime = Carbon::now()->addMinutes($test->duration);
+
+    return view('students.startTest', compact('test', 'questions', 'endTime'));
+} 
+
+public function submitTest(Test $test){
+    return view('students.submitTest', compact('test'));
+} 
+
+public function submitTestPost(Test $test, Request $request){
+    $test->update( $request->all());
+    return redirect()->route('courses.tests.index', $test);
+} 
+
+public function testResult(Test $test){
+    return view('students.testResult', compact('test'));
+} 
+
+public function testResultPost(Test $test, Request $request){
+    $test->update( $request->all());
+    return redirect()->route('courses.tests.index', $test);
+} 
+
 }

@@ -65,7 +65,8 @@ use Illuminate\Support\Facades\Route;
 
     Route::middleware(['auth:students'])->group(function () {
         Route::get('tests/{test}/startInstructions', [TestController::class, 'startTestInstructions'])->name('students.tests.startInstructions');
-        Route::post('tests/{test}/take', [TestController::class, 'takeTest'])->name('students.tests.take');    
+        Route::get('tests/{test}/start', [TestController::class, 'startTest'])->name('students.test.start');
+           
     }); 
     
     Route::get('create/tests', [TestController::class, 'createView'])->name('createView.index');

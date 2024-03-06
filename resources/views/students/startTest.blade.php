@@ -1,44 +1,62 @@
 @extends('layouts.layout')
 @section('content')
-@section('content')
     <div class="container">
-        <h1>Test Instructions</h1>
+        <h1>{{ $test->title }}</h1>
+        <p>Time Remaining: <span id="timer"></span></p>
 
-        <!-- Modal -->
-        <div class="modal fade" id="instructionsModal" tabindex="-1" role="dialog" aria-labelledby="instructionsModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="instructionsModalLabel">Test Instructions</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Add your instructions content here -->
-                        <p>These are the instructions for the test...</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" id="startTestBtn">Start Test</button>
-                    </div>
-                </div>
-            </div>
+        <!-- Display current question here -->
+        <div class="question-container">
+            <p>Question 1:</p>
+            <p>{{ $questions[0]->text }}</p>
+        </div>
+
+        <!-- Navigation buttons -->
+        <div class="navigation-buttons">
+            <button class="btn btn-primary" id="prevBtn" disabled>Previous</button>
+            <button class="btn btn-primary" id="nextBtn">Next</button>
         </div>
     </div>
 
     <script>
-        // Use jQuery to prevent the modal from closing when clicking outside
-        $(document).ready(function() {
-            $('#instructionsModal').modal({
-                backdrop: 'static',
-                keyboard: false
-            });
+        // Timer logic
+        var endTime = new Date("{{ $endTime }}").getTime();
 
-            // Add a click event listener to the "Start Test" button
-            $('#startTestBtn').click(function() {
-                window.location.href = "{{ route('start.test', $test) }}";
-            });
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = endTime - now;
+
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("timer").innerHTML = "EXPIRED";
+                // You can add logic to automatically submit the test when the timer expires
+            }
+        }, 1000);
+
+        // Navigation logic
+        var currentQuestionIndex = 0;
+
+        document.getElementById("nextBtn").addEventListener("click", function() {
+            currentQuestionIndex++;
+            showQuestion();
         });
+
+        document.getElementById("prevBtn").addEventListener("click", function() {
+            currentQuestionIndex--;
+            showQuestion();
+        });
+
+        function showQuestion() {
+            // Disable/enable navigation buttons based on the current question index
+            document.getElementById("nextBtn").disabled = currentQuestionIndex === $questions.length - 1;
+            document.getElementById("prevBtn").disabled = currentQuestionIndex === 0;
+
+            // Display the current question
+            document.querySelector('.question-container p:last-of-type').innerHTML = $questions[currentQuestionIndex].text;
+        }
     </script>
 @endsection
