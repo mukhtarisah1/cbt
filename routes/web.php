@@ -23,48 +23,53 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/register', [AuthController::class, 'loadRegister']);
-Route::post('/register', [AuthController::class, 'adminRegister'])->name('adminRegister');
+    Route::get('/register', [AuthController::class, 'loadRegister']);
+    Route::post('/register', [AuthController::class, 'adminRegister'])->name('adminRegister');
 
-// Route::get('/login', function(){
-//     return redirect('/');
-// });
+    // Route::get('/login', function(){
+    //     return redirect('/');
+    // });
 
-Route::get('/', [AuthController::class, 'loadLogin']);
-Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
+    Route::get('/', [AuthController::class, 'loadLogin']);
+    Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
 
-Route::get('/studentLogin', [AuthController::class, 'loadStudentLogin'])->name('student.login');
-Route::post('/studentlogin', [AuthController::class, 'studentLogin'])->name('loginStudent'); 
+    Route::get('/studentLogin', [AuthController::class, 'loadStudentLogin'])->name('student.login');
+    Route::post('/studentlogin', [AuthController::class, 'studentLogin'])->name('loginStudent'); 
 
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/forget-password', [AuthController::class, 'forgetPasswordLoad']);
-Route::post('/forget-password', [AuthController::class, 'forgetPasswordLoad'])->name('forgetPassword');
+    Route::get('/forget-password', [AuthController::class, 'forgetPasswordLoad']);
+    Route::post('/forget-password', [AuthController::class, 'forgetPasswordLoad'])->name('forgetPassword');
 
-Route::group(['middleware'=>['web', 'checkAdmin']],function(){
-    Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard']);
-    Route::post('addSubject', [AdminController::class, 'addSubject'])->name('addSubject');
-});
+    Route::group(['middleware'=>['web', 'checkAdmin']],function(){
+        Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard']);
+        Route::post('addSubject', [AdminController::class, 'addSubject'])->name('addSubject');
+    });
 
-Route::get('/dashboard', [AuthController::class, 'loadDashboard']);
-
-
-
-
-Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
-Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
-Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
-Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
-Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+    Route::get('/dashboard', [AuthController::class, 'loadDashboard']);
 
 
 
 
-Route::middleware(['auth'])->group(function () {
+    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
+    Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
+    Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
+    Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
+    Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+
+
+
+
+
+
+    Route::middleware(['auth:students'])->group(function () {
+        Route::get('tests/{test}/startInstructions', [TestController::class, 'startTestInstructions'])->name('students.tests.startInstructions');
+        Route::post('tests/{test}/take', [TestController::class, 'takeTest'])->name('students.tests.take');    
+    }); 
     
     Route::get('create/tests', [TestController::class, 'createView'])->name('createView.index');
-    Route::get('courses/tests', [TestController::class, 'index'])->name('courses.tests.index');  
+    Route::get('courses/tests', [TestController::class, 'index'])->name('courses.tests.index'); 
     Route::get('courses/{course}/tests/create', [TestController::class, 'create'])->name('courses.tests.create');
     Route::post('courses/{course}/tests', [TestController::class, 'store'])->name('courses.tests.store');
     Route::get('courses/{course}/tests/{test}', [TestController::class, 'show'])->name('courses.tests.show');
@@ -92,7 +97,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/levels/{level}', [LevelController::class, 'update'])->name('levels.update');
     Route::delete('/levels/{level}', [LevelController::class, 'destroy'])->name('levels.destroy');
 
-}); 
+    
+
+
 //students related routes
 Route::get('/get-students/{level}', [TestAssignmentController::class, 'getStudents'])->name('get.students');
 

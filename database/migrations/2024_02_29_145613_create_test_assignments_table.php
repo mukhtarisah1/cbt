@@ -15,6 +15,7 @@ return new class extends Migration
            $table->id();
         $table->unsignedBigInteger('test_id');
         $table->unsignedBigInteger('student_id');
+        $table->boolean('active')->nullable()->default(true);
         $table->timestamps();
 
        

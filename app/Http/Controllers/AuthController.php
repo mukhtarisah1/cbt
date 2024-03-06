@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PasswordReset;
 use App\Models\Student;
+use App\Models\TestAssignment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\carbon;
@@ -118,7 +119,11 @@ class AuthController extends Controller
     }
 
     public function loadDashboard(){
-        return view('students.dashboard');
+        $studentId = auth()->guard('students')->user()->id;
+        //dd($student);
+        $testsId = TestAssignment::where('student_id', $studentId)->where('active', true)->get();
+        //dd($testsId);
+        return view('students.dashboard', compact('testsId','studentId'));
     }
 
     public function adminDashboard(){

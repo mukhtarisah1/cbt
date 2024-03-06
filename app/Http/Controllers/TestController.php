@@ -71,4 +71,9 @@ class TestController extends Controller
         $courses = Course::all()->sortBy('name');
         return view('admin.tests.createView',compact('courses'));
     }
+
+
+    public function startTestInstructions(Test $test){
+        return view('students.startTest', compact('test'));
+    } 
 }
