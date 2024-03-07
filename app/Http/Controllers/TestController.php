@@ -80,10 +80,11 @@ class TestController extends Controller
 
 public function startTest(Test $test){
     $questions = $test->questions;
-
+    //dd($questions);
     // Calculate the end time based on the test duration
-    $endTime = Carbon::now()->addMinutes($test->duration);
-
+    $duration =$test->duration;
+    $endTime = Carbon::now()->addMinutes($duration);
+    //dd($endTime);
     return view('students.startTest', compact('test', 'questions', 'endTime'));
 } 
 
