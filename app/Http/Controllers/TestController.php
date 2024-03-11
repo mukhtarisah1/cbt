@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Test;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TestController extends Controller
 {
@@ -80,10 +81,14 @@ class TestController extends Controller
 
 public function startTest(Test $test){
     $questions = $test->questions;
-    //dd($questions);
-    // Calculate the end time based on the test duration
+    if(!Session::has('test_start_time')){
+        Session::put( 'test_start_time', Carbon::now() );
+    }
+
     $duration =$test->duration;
-    $endTime = Carbon::now()->addMinutes($duration);
+    $startTime = Session::get('test_start_time');
+    //dd($startTime);
+    $endTime = $startTime->addMinutes($duration);
     //dd($endTime);
     return view('students.startTest', compact('test', 'questions', 'endTime'));
 } 
