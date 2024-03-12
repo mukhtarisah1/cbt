@@ -14,6 +14,8 @@
         <div class="navigation-buttons">
             <button class="btn btn-primary" id="prevBtn" disabled>Previous</button>
             <button class="btn btn-primary" id="nextBtn">Next</button>
+            <button class="btn btn-primary" id="submitBtn" type="submit" style="display: none;">Submit</button>
+            
         </div>
     </div>
 
@@ -66,6 +68,17 @@
 
         // Disable/enable navigation buttons based on the current question index
         document.getElementById("prevBtn").disabled = currentQuestionIndex === 0;
+        // Check if there are no more questions
+        if (currentQuestionIndex >= questions.length -1) {
+            // Show the Submit button when there are no more questions
+            document.getElementById("nextBtn").style.display = "none";
+            document.getElementById("submitBtn").style.display = "inline-block";
+        }else {
+            // Show the Next button when there are more questions
+            document.getElementById("nextBtn").style.display = "inline-block";
+            document.getElementById("submitBtn").style.display = "none";
+        }
+            
     }
 
     document.getElementById("nextBtn").addEventListener("click", function() {
