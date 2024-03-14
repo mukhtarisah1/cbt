@@ -32,7 +32,7 @@
             questionContainer.innerHTML = `
                 <p><strong>Question ${currentQuestionIndex + 1}:</strong></p>
                 <p>${question.question}</p>
-                <form>
+                <form action="{{route('students.test.finish', ['test'=> $test->id])}}" method="post">
                     <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="A"> (A) ${question.option_a}</label></p>
                     <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="B"> (B) ${question.option_b}</label></p>
                     <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="C"> (C) ${question.option_c}</label></p>

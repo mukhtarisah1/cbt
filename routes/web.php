@@ -61,11 +61,12 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
+//student routes for student user functions
 
     Route::middleware(['auth:students'])->group(function () {
         Route::get('tests/{test}/startInstructions', [TestController::class, 'startTestInstructions'])->name('students.tests.startInstructions');
         Route::get('tests/{test}/start', [TestController::class, 'startTest'])->name('students.test.start');
+        Route::post('tests/{test}/finish', [TestController::class, 'startTest'])->name('students.test.finish');
            
     }); 
     
