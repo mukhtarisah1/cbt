@@ -6,17 +6,19 @@
         <p>Time Remaining: <span id="timer"></span></p>
 
         <!-- Display current question here -->
-        <div id="question-container" class="question-container" data-index="0">
-            <!-- Question content will be dynamically generated here -->
-        </div>
+        <form id="testForm" action="{{ route('students.test.finish', ['test' => $test->id]) }}" method="post">
+            @csrf
+            <div id="question-container" class="question-container" data-index="0">
+                <!-- Question content will be dynamically generated here -->
+            </div>
 
-        <!-- Navigation buttons -->
-        <div class="navigation-buttons">
-            <button class="btn btn-primary" id="prevBtn" disabled>Previous</button>
-            <button class="btn btn-primary" id="nextBtn">Next</button>
-            <button class="btn btn-primary" id="submitBtn" type="submit" style="display: none;">Submit</button>
-            
-        </div>
+            <!-- Navigation buttons -->
+            <div class="navigation-buttons">
+                <button class="btn btn-primary" type="button" id="prevBtn" disabled>Previous</button>
+                <button class="btn btn-primary" type="button" id="nextBtn">Next</button>
+                <button class="btn btn-primary" id="submitBtn" type="submit" style="display: none;">Submit</button>
+            </div>
+        </form>    
     </div>
 
     <script>
@@ -32,12 +34,10 @@
             questionContainer.innerHTML = `
                 <p><strong>Question ${currentQuestionIndex + 1}:</strong></p>
                 <p>${question.question}</p>
-                <form action="{{route('students.test.finish', ['test'=> $test->id])}}" method="post">
-                    <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="A"> (A) ${question.option_a}</label></p>
-                    <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="B"> (B) ${question.option_b}</label></p>
-                    <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="C"> (C) ${question.option_c}</label></p>
-                    <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="D"> (D) ${question.option_d}</label></p>
-                </form>
+                <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="A"> (A) ${question.option_a}</label></p>
+                <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="B"> (B) ${question.option_b}</label></p>
+                <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="C"> (C) ${question.option_c}</label></p>
+                <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="D"> (D) ${question.option_d}</label></p>
             `;
             console.log(`Question displayed: ${currentQuestionIndex + 1}`);
         } else {
@@ -73,15 +73,15 @@
             // Show the Submit button when there are no more questions
             document.getElementById("nextBtn").style.display = "none";
             document.getElementById("submitBtn").style.display = "inline-block";
-        }else {
+        } else {
             // Show the Next button when there are more questions
             document.getElementById("nextBtn").style.display = "inline-block";
             document.getElementById("submitBtn").style.display = "none";
         }
-            
     }
 
-    document.getElementById("nextBtn").addEventListener("click", function() {
+    document.getElementById("nextBtn").addEventListener("click", function(e) {
+        e.preventDefault();
         currentQuestionIndex++;
         showQuestion();
         console.log(`Next button clicked. Current index: ${currentQuestionIndex}`);
@@ -98,6 +98,6 @@
 
     // Timer interval
     var timerInterval = setInterval(updateTimer, 1000);
-</script>
+    </script>
 
 @endsection

@@ -94,10 +94,12 @@ public function startTest(Test $test){
 } 
 
 public function submitTest(Test $test){
+    dd('here');
     return view('students.submitTest', compact('test'));
 } 
 
 public function submitTestPost(Test $test, Request $request){
+    dd($request);
     $test->update( $request->all());
     return redirect()->route('courses.tests.index', $test);
 } 
