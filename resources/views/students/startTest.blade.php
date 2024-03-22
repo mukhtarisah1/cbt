@@ -34,10 +34,11 @@
             questionContainer.innerHTML = `
                 <p><strong>Question ${currentQuestionIndex + 1}:</strong></p>
                 <p>${question.question}</p>
-                <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="A"> (A) ${question.option_a}</label></p>
-                <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="B"> (B) ${question.option_b}</label></p>
-                <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="C"> (C) ${question.option_c}</label></p>
-                <p><label><input type="radio" name="answer_${currentQuestionIndex}" value="D"> (D) ${question.option_d}</label></p>
+                <input type="hidden" name="question_${currentQuestionIndex}" value="${question.id}">
+                <p><label><input type="radio" name="answer_${question.id}" value="A"> (A) ${question.option_a}</label></p>
+                <p><label><input type="radio" name="answer_${question.id}" value="B"> (B) ${question.option_b}</label></p>
+                <p><label><input type="radio" name="answer_${question.id}" value="C"> (C) ${question.option_c}</label></p>
+                <p><label><input type="radio" name="answer_${question.id}" value="D"> (D) ${question.option_d}</label></p>
             `;
             console.log(`Question displayed: ${currentQuestionIndex + 1}`);
         } else {
