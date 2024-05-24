@@ -5,18 +5,25 @@
         
         <p>Time Remaining: <span id="timer"></span></p>
 
-        <!-- Display current question here -->
         <form id="testForm" action="{{ route('students.test.finish', ['test' => $test->id]) }}" method="post">
             @csrf
             <div id="question-container" class="question-container" data-index="0">
                 <!-- Question content will be dynamically generated here -->
             </div>
 
-            <!-- Navigation buttons -->
             <div class="navigation-buttons">
                 <button class="btn btn-primary" type="button" id="prevBtn" disabled>Previous</button>
                 <button class="btn btn-primary" type="button" id="nextBtn">Next</button>
                 <button class="btn btn-primary" id="submitBtn" type="submit" style="display: none;">Submit</button>
+            </div>
+            
+            
+            <div id="placeholder-buttons" class="placeholder-buttons mt-20" style="margin-top: 20px" >
+                <!-- Placeholder buttons will be dynamically generated here -->
+            </div>
+
+            <div id="hidden-answers">
+                <!-- Hidden inputs for all answers will be dynamically generated here -->
             </div>
         </form>    
     </div>
@@ -25,20 +32,22 @@
     var currentQuestionIndex = 0;
     var endTime = new Date("{{ $endTime }}").getTime();
     var questions = {!! json_encode($questions ?? []) !!};
+    var answers = {};
 
     function updateQuestionDisplay() {
         if (currentQuestionIndex < questions.length) {
             var questionContainer = document.getElementById("question-container");
             var question = questions[currentQuestionIndex];
+            var answer = answers[question.id] || "";
 
             questionContainer.innerHTML = `
                 <p><strong>Question ${currentQuestionIndex + 1}:</strong></p>
                 <p>${question.question}</p>
                 <input type="hidden" name="question_${currentQuestionIndex}" value="${question.id}">
-                <p><label><input type="radio" name="answer_${question.id}" value="A"> (A) ${question.option_a}</label></p>
-                <p><label><input type="radio" name="answer_${question.id}" value="B"> (B) ${question.option_b}</label></p>
-                <p><label><input type="radio" name="answer_${question.id}" value="C"> (C) ${question.option_c}</label></p>
-                <p><label><input type="radio" name="answer_${question.id}" value="D"> (D) ${question.option_d}</label></p>
+                <p><label><input type="radio" name="answer_${question.id}" value="A" ${answer === "A" ? "checked" : ""}> (A) ${question.option_a}</label></p>
+                <p><label><input type="radio" name="answer_${question.id}" value="B" ${answer === "B" ? "checked" : ""}> (B) ${question.option_b}</label></p>
+                <p><label><input type="radio" name="answer_${question.id}" value="C" ${answer === "C" ? "checked" : ""}> (C) ${question.option_c}</label></p>
+                <p><label><input type="radio" name="answer_${question.id}" value="D" ${answer === "D" ? "checked" : ""}> (D) ${question.option_d}</label></p>
             `;
             console.log(`Question displayed: ${currentQuestionIndex + 1}`);
         } else {
@@ -58,8 +67,8 @@
         if (distance < 0) {
             clearInterval(timerInterval);
             document.getElementById("timer").innerHTML = "EXPIRED";
-            // You can add logic to automatically submit the test when the timer expires
-            console.log("Timer expired");
+            // Automatically submit the form if the timer expires
+            document.getElementById("testForm").submit();
         }
     }
 
@@ -67,38 +76,77 @@
         updateQuestionDisplay();
         updateTimer();
 
-        // Disable/enable navigation buttons based on the current question index
         document.getElementById("prevBtn").disabled = currentQuestionIndex === 0;
-        // Check if there are no more questions
-        if (currentQuestionIndex >= questions.length -1) {
-            // Show the Submit button when there are no more questions
+        if (currentQuestionIndex >= questions.length - 1) {
             document.getElementById("nextBtn").style.display = "none";
             document.getElementById("submitBtn").style.display = "inline-block";
         } else {
-            // Show the Next button when there are more questions
             document.getElementById("nextBtn").style.display = "inline-block";
             document.getElementById("submitBtn").style.display = "none";
         }
     }
 
+    function saveAnswer() {
+        var currentQuestionId = questions[currentQuestionIndex].id;
+        var answer = document.querySelector(`input[name="answer_${currentQuestionId}"]:checked`);
+        if (answer) {
+            answers[currentQuestionId] = answer.value;
+
+            // Update or create hidden input for the answer
+            var hiddenAnswersContainer = document.getElementById('hidden-answers');
+            var existingInput = document.querySelector(`input[name="answer_hidden_${currentQuestionId}"]`);
+            if (existingInput) {
+                existingInput.value = answer.value;
+            } else {
+                var hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = `answer_${currentQuestionId}`;
+                hiddenInput.value = answer.value;
+                hiddenAnswersContainer.appendChild(hiddenInput);
+            }
+        }
+    }
+
+    function navigateToQuestion(index) {
+        saveAnswer();
+        currentQuestionIndex = index;
+        showQuestion();
+        console.log(`Navigated to question index: ${currentQuestionIndex}`);
+    }
+
+    function createPlaceholderButtons() {
+        var placeholderContainer = document.getElementById("placeholder-buttons");
+        placeholderContainer.innerHTML = "";
+        for (let i = 0; i < questions.length; i++) {
+            var button = document.createElement("button");
+            button.className = "btn btn-secondary";
+            button.type = "button";
+            button.textContent = i + 1;
+            button.addEventListener("click", function() {
+                navigateToQuestion(i);
+            });
+            placeholderContainer.appendChild(button);
+        }
+    }
+
     document.getElementById("nextBtn").addEventListener("click", function(e) {
         e.preventDefault();
+        saveAnswer();
         currentQuestionIndex++;
         showQuestion();
         console.log(`Next button clicked. Current index: ${currentQuestionIndex}`);
     });
 
     document.getElementById("prevBtn").addEventListener("click", function() {
+        saveAnswer();
         currentQuestionIndex--;
         showQuestion();
         console.log(`Previous button clicked. Current index: ${currentQuestionIndex}`);
     });
 
-    // Initial display
     showQuestion();
+    createPlaceholderButtons();
 
-    // Timer interval
     var timerInterval = setInterval(updateTimer, 1000);
     </script>
-
 @endsection
