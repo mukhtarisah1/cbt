@@ -169,9 +169,16 @@ public function startTest(Test $test){
         return view('students.finishScreen');
     }
 
-    public function testResult(Test $test){
-        return view('students.testResult', compact('test'));
-    } 
+    public function showResults($courseId, $testId)
+    {
+        $course = Course::findOrFail($courseId);
+        $test = Test::findOrFail($testId);
+        $results = TestResult::with(['student', 'test'])
+            ->where('test_id', $testId)
+            ->get();
+
+        return view('admin.courses.results', compact('course', 'test', 'results'));
+    }
 
     public function testResultPost(Test $test, Request $request){
         $test->update( $request->all());

@@ -57,6 +57,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
     Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
     Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+    Route::get('courses/{course}/tests/{test}/results', [TestController::class, 'showResults'])->name('courses.tests.results');
 
 
 
