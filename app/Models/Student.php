@@ -16,4 +16,14 @@ class Student extends Model implements Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     
     protected $guarded = [];
+
+    public function tests()
+    {
+        return $this->belongsToMany(Test::class, 'test_results')->withPivot('score');
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }
