@@ -48,8 +48,9 @@
                         <tbody>
                             @foreach($course->tests as $test)
                                 <tr>
-                                    <td>{{ $test->name }}</td>
+                                    <td>{{ $test->title }}</td>
                                     <td >{{ $test->duration }} minutes</td>
+                                    
                                 </tr>
                             @endforeach
                         </tbody>
