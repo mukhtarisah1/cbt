@@ -113,3 +113,26 @@ Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name
 Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
 Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
 Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
+
+use App\Http\Controllers\UserController;
+
+// Route to list all users
+Route::get('/users', [AdminController::class, 'index'])->name('users.index');
+
+// Route to show the form to create a new user
+Route::get('/users/create', [AdminController::class, 'create'])->name('users.create');
+
+// Route to store a new user
+Route::post('/users', [AdminController::class, 'store'])->name('users.store');
+
+// Route to show a single user
+Route::get('/users/{user}', [AdminController::class, 'show'])->name('users.show');
+
+// Route to show the form to edit an existing user
+Route::get('/users/{user}/edit', [AdminController::class, 'edit'])->name('users.edit');
+
+// Route to update an existing user
+Route::put('/users/{user}', [AdminController::class, 'update'])->name('users.update');
+
+// Route to delete an existing user
+Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');

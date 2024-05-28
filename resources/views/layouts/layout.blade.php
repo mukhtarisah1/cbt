@@ -40,6 +40,7 @@
       // add loading class to html immediately
       document.querySelector('html').classList.add('loading');
     </script><!-- END THEME STYLES -->
+    
    
   </head>
   <body>
