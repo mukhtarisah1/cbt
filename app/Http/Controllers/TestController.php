@@ -173,7 +173,7 @@ public function startTest(Test $test){
     {
         $course = Course::findOrFail($courseId);
         $test = Test::findOrFail($testId);
-        $results = TestResult::with(['student', 'test'])
+        $results = TestResult::with(['student', 'test']) 
             ->where('test_id', $testId)
             ->get();
 

@@ -1,15 +1,20 @@
 <?php
 
+use App\Exports\ResultsExport;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LevelController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestAssignmentController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestQuestionController;
-use App\Http\Controllers\LevelController;
+use App\Models\Course;
+use App\Models\Test;
+use App\Models\TestResult;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
-
+use Maatwebsite\Excel\Facades\Excel;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -114,7 +119,8 @@ Route::put('/students/{student}', [StudentController::class, 'update'])->name('s
 Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
 Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
 
-use App\Http\Controllers\UserController;
+
+
 
 // Route to list all users
 Route::get('/users', [AdminController::class, 'index'])->name('users.index');
@@ -136,3 +142,17 @@ Route::put('/users/{user}', [AdminController::class, 'update'])->name('users.upd
 
 // Route to delete an existing user
 Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+
+
+Route::get('/results/export/excel', function () {
+    return Excel::download(new ResultsExport, 'results.xlsx');
+})->name('results.export.excel');
+
+Route::get('/results/export/pdf', function () {
+    $test = Test::find(request('test_id'));
+    $course = Course::find(request('course_id'));
+    $results = TestResult::where('test_id', $test->id)->get();
+
+    $pdf = Pdf::loadView('results.pdf', compact('test', 'course', 'results'));
+    return $pdf->download('results.pdf');
+})->name('results.export.pdf');
