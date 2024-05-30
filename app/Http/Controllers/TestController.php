@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TestSubmitted;
 use App\Models\Answer;
 use App\Models\Course;
 use App\Models\Test;
@@ -106,25 +107,23 @@ public function startTest(Test $test){
     } 
 
     public function submitTestPost(Test $test, Request $request)
-    {
-        $studentId = auth()->id(); // Assuming the student is authenticated
-        $questions = $request->input('questions', []);
-        $totalQuestions = count($questions);
-        $correctAnswers = 0;
+{
+    $studentId = auth()->id(); // Assuming the student is authenticated
+    $questions = $request->input('questions', []);
+    $totalQuestions = count($questions);
+    $answeredQuestions = 0;
+    $correctAnswers = 0;
 
-        foreach ($questions as $question) {
-            $questionId = $question['id'];
-            $submittedAnswer = $question['answer'];
+    foreach ($questions as $question) {
+        $questionId = $question['id'];
+        $submittedAnswer = $question['answer'];
 
-            // Check if the answer is null
-            if (is_null($submittedAnswer)) {
-                return back()->with('error', 'All questions must be answered.');
-            }
-
-            $correctAnswer = $question['correct_answer'];
-
-            // Map the submitted answer to its corresponding text
+        // Check if the answer is null
+        if (is_null($submittedAnswer)) {
             $submittedAnswerText = '';
+        } else {
+            $answeredQuestions++;
+            // Map the submitted answer to its corresponding text
             switch ($submittedAnswer) {
                 case 'A':
                     $submittedAnswerText = $question['option_a'];
@@ -138,34 +137,39 @@ public function startTest(Test $test){
                 case 'D':
                     $submittedAnswerText = $question['option_d'];
                     break;
+                default:
+                    $submittedAnswerText = '';
+                    break;
             }
 
-            // Store the answer
-            Answer::create([
-                'student_id' => $studentId,
-                'question_id' => $questionId,
-                'test_id' => $test->id,
-                'answer' => $submittedAnswerText,
-            ]);
-
             // Check if the answer is correct
-            if ($submittedAnswerText == $correctAnswer) {
+            if ($submittedAnswerText == $question['correct_answer']) {
                 $correctAnswers++;
             }
         }
 
-        // Calculate score
-        $score = ($correctAnswers / $totalQuestions) * 100;
-
-        // Store the test result
-        TestResult::create([
+        // Store the answer
+        Answer::create([
             'student_id' => $studentId,
+            'question_id' => $questionId,
             'test_id' => $test->id,
-            'score' => $score,
+            'answer' => $submittedAnswerText,
         ]);
-
-        return redirect()->route('finishScreen')->with('status', 'Test submitted successfully!');
     }
+
+    // Calculate score
+    $score = $answeredQuestions > 0 ? ($correctAnswers / $totalQuestions) * 100 : 0;
+
+    // Store the test result
+    TestResult::create([
+        'student_id' => $studentId,
+        'test_id' => $test->id,
+        'score' => $score,
+    ]);
+    TestSubmitted::dispatch($test, $studentId);
+    return redirect()->route('finishScreen')->with('status', 'Test submitted successfully!');
+}
+
 
 
     public function finishTest()

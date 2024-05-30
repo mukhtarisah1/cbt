@@ -18,13 +18,13 @@
         <div class="col-md-6">                           
             <div class="form-group">
                 <label for="name">Level Name:</label>
-                <div class="custom-number">
-                    <input type="number" name="level" class="form-control" value="{{ old('level') }}" >
+                <div class="">
+                    <input type="text" name="level" class="form-control" value="{{ old('level') }}" placeholder="Enter level name" >
                 </div>
             </div>
             <div class="form-group">
                 <label for="name">Level Description:</label>
-                <input type="text" name="description" class="form-control" value="{{ old('description') }}" >
+                <input type="text" name="description" class="form-control" value="{{ old('description') }}" placeholder="Enter level description">
             </div>
         </div>
         
