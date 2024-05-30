@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
+use App\Models\Level;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\QueryException;
@@ -28,7 +29,8 @@ class StudentController extends Controller
 
     public function create()
     {
-        return view('students.create');
+        $levels = Level::all();
+        return view('students.create', compact('levels'));
     }
 
     public function store(Request $request)
@@ -37,6 +39,7 @@ class StudentController extends Controller
         $data = $request->validate([
             'firstname' =>'required',
             'lastname' =>'required',
+            'middlename' => 'required',
             'level' =>'required|numeric',
             'reg_no' =>'required',
             'email' =>'required',
@@ -49,7 +52,8 @@ class StudentController extends Controller
 
     public function edit(Student $student)
     {
-        return view('students.edit', compact('student'));
+        $levels = Level::all();
+        return view('students.edit', compact('student','levels'));
     }
 
     public function update(Request $request, Student $student)
@@ -59,7 +63,7 @@ class StudentController extends Controller
             'lastname' => 'required',
             'middlename' => 'required',
             'reg_no' => 'required|unique:users,reg_no,' . $student->id,
-            'level' => 'required|numeric',
+            'level' => 'required',
             'email' => 'required',
         ]);
 

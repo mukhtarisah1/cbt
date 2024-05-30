@@ -59,10 +59,17 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="option_a">Level</label>
-                        <input class="form-control" type="number" name="level" value="{{$student->level}}" placeholder="Enter Student Level">
+                        <label for="level">Level</label>
+                        <select class="custom-select" name="level">
+                            <option value="" disabled>Select Student Level</option>
+                            @foreach($levels as $level)
+                                <option value="{{ $level->level }}" {{ (old('level') ?? $student->level) == $level->level ? 'selected' : '' }}>
+                                    {{ $level->level }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('level')
-                        <p style="color:red;">{{$message}}</p>
+                            <p style="color:red;">{{$message}}</p>
                         @enderror
                     </div>
                     <input type="submit" class="btn btn-success" value="Edit Student">

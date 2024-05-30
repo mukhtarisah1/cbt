@@ -59,8 +59,15 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="option_a">Level</label>
-                        <input class="form-control" type="number" name="level" value="{{old('level')}}" placeholder="Enter Student Level">
+                        <label for="level">Level</label>
+                        <select class="custom-select" name="level">
+                            <option value="" disabled selected>Select Student Level</option>
+                            @foreach($levels as $level)
+                                <option value="{{ $level->level }}" {{ old('level') == $level->level ? 'selected' : '' }}>
+                                    {{ $level->level }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('level')
                             <p style="color:red;">{{$message}}</p>
                         @enderror
@@ -76,7 +83,7 @@
             @csrf
             <div class="card-body ">
                 <h5 class="card-title text-success">CSV Upload</h5>
-                <p class="card-text">To upload a list of students from a CSV document, prepare the document in the structure as indicated below.<br>
+                <p class="card-text">To upload a list of students from an excel document, prepare the document in the structure as indicated below.<br>
                 <table class="table table-bordered">
                     <thead>
                         <tr><th>Name</th><th>Email</th><th>reg_no</th><th>Level</th></tr>
