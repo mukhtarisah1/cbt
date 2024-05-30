@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class TestAssignmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function create(Request $requsest, Course $course, Test $test ){
         $students  = Student::all();
         $levels = Level::all();
