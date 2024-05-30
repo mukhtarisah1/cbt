@@ -42,7 +42,7 @@ class AdminController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->is_admin = $request->has('is_admin') ? 1 : 0;
-        $user->reg_no = $request->reg_no;
+        
         $user->level = $request->level;
         $user->save();
 
@@ -70,24 +70,24 @@ class AdminController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-
+        //dd($validator);
         $user->name = $request->name;
         $user->email = $request->email;
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
         $user->is_admin = $request->has('is_admin') ? 1 : 0;
-        $user->reg_no = $request->reg_no;
+        
         $user->level = $request->level;
         $user->save();
 
-        return redirect()->back()->with('success', 'User updated successfully');
+        return redirect('/users')->with('success', 'User updated successfully');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->back()->with('success', 'User deleted successfully');
+        return redirect('/users')->with('success', 'User deleted successfully');
     }
    
 }

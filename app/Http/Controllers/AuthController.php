@@ -67,7 +67,7 @@ class AuthController extends Controller
             'email' => 'email|required',
             'password' => 'required|min:6'
         ]);
-    
+       //dd('here');
         $userCredential = $request->only('email', 'password');
     
         // Check if the email exists
@@ -79,7 +79,7 @@ class AuthController extends Controller
     
         // Check if the password is correct
         if (!Hash::check($userCredential['password'], $user->password)) {
-            return back()->withErrors(['email' => 'Invalid email or password'])->withInput();
+            return back()->withErrors(['password' => 'Invalid password'])->withInput();
         }
     
         if(Auth::attempt($userCredential)){

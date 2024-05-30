@@ -1,9 +1,18 @@
 @extends('layouts.layout')
 
 @section('content')
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="row">
         <div class="col">
             <div id="base-style" class="card">
+            
                 <div class="card-body border">
                     <fieldset>
                         <legend class="text-success border-bottom">List of All Courses with test</legend>

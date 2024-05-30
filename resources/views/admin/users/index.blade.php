@@ -1,8 +1,18 @@
 @extends('layouts.layout')
 @section('content')
     <div class="container">
+
         <h1>Users</h1>
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
         <a href="/register" class="btn btn-primary">Add User</a>
+        
         <table class="table mt-3">
             <thead>
                 <tr>

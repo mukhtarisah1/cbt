@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->boolean('is_admin')->default(0);
-            $table->string('reg_no')->unique()->nullable();
+            $table->boolean('is_admin')->default(1);
+            
             $table->integer('level')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();

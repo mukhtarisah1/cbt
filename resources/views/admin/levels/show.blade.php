@@ -4,7 +4,7 @@
     <h2>Level Details</h2>
 
     <p><strong>ID:</strong> {{ $level->id }}</p>
-    <p><strong>Name:</strong> {{ $level->name }}</p>
+    <p><strong>Name:</strong> {{ $level->level }}</p>
 
     <a href="{{ route('levels.edit', $level) }}" class="btn btn-warning">Edit Level</a>
     <form action="{{ route('levels.destroy', $level) }}" method="POST" style="display: inline-block">

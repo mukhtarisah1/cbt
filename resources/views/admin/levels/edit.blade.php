@@ -16,9 +16,13 @@
     <form action="{{ route('levels.update', $level) }}" method="POST">
         @csrf
         @method('PUT')
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <label for="name">Level Name:</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name', $level->name) }}" required>
+            <input type="text" name="level" class="form-control" value="{{ old('level', $level->level) }}" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="name">Level Description:</label>
+            <input type="text" name="description" class="form-control" value="{{ old('level', $level->description) }}" required>
         </div>
         <button type="submit" class="btn btn-primary">Update Level</button>
     </form>

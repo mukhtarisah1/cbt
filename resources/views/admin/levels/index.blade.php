@@ -6,8 +6,11 @@
     <a href="{{ route('levels.create') }}" class="btn btn-primary mb-3">Add Level</a>
 
     @if(session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
 
@@ -23,7 +26,7 @@
             @forelse ($levels as $level)
                 <tr>
                     <td>{{ $level->id }}</td>
-                    <td>{{ $level->name }}</td>
+                    <td>{{ $level->level }}</td>
                     <td>
                         <a href="{{ route('levels.show', $level) }}" class="btn btn-info btn-sm">View</a>
                         <a href="{{ route('levels.edit', $level) }}" class="btn btn-warning btn-sm">Edit</a>
