@@ -67,7 +67,7 @@ class AuthController extends Controller
             'email' => 'email|required',
             'password' => 'required|min:6'
         ]);
-       //dd('here');
+       
         $userCredential = $request->only('email', 'password');
     
         // Check if the email exists
