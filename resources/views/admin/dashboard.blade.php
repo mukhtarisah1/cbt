@@ -6,49 +6,49 @@
 
 <div class="metric-row">
                     <div class="col-lg-9">
-                      <div class="metric-row metric-flush">
+                      <div class="metric-row metric-flush"> 
                         <!-- metric column -->
                         <div class="col">
                           <!-- .metric -->
-                          <a href="#" class="metric metric-bordered align-items-center">
+                          <span href="#" class="metric metric-bordered align-items-center">
                             <h2 class="metric-label"> Examiners </h2>
                             <p class="metric-value h3">
-                              <sub><i class="oi oi-people"></i></sub> <span class="value">8</span>
+                              <sub><i class="oi oi-people"></i></sub> <span class="value">{{ $examiners }}</span>
                             </p>
-                          </a> <!-- /.metric -->
+                          </span> <!-- /.metric -->
                         </div><!-- /metric column -->
                         <!-- metric column -->
                         <div class="col">
                           <!-- .metric -->
-                          <a href="#" class="metric metric-bordered align-items-center">
+                          <span href="#" class="metric metric-bordered align-items-center">
                             <h2 class="metric-label"> courses </h2>
                             <p class="metric-value h3">
-                              <sub><i class="oi oi-fork"></i></sub> <span class="value">12</span>
+                              <sub><i class="oi oi-fork"></i></sub> <span class="value">{{ $courses }}</span>
                             </p>
-                          </a> <!-- /.metric -->
+                          </span> <!-- /.metric -->
                         </div><!-- /metric column -->
                         <!-- metric column -->
                         <div class="col">
                           <!-- .metric -->
-                          <a href="#" class="metric metric-bordered align-items-center">
+                          <span href="#" class="metric metric-bordered align-items-center">
                             <h2 class="metric-label"> Tests </h2>
                             <p class="metric-value h3">
-                              <sub><i class="fa fa-tasks"></i></sub> <span class="value">64</span>
+                              <sub><i class="fa fa-tasks"></i></sub> <span class="value">{{ $tests }}</span>
                             </p>
-                          </a> <!-- /.metric -->
+                          </span> <!-- /.metric -->
                         </div><!-- /metric column -->
                       </div>
                     </div><!-- metric column -->
                     <div class="col-lg-3">
                       <!-- .metric -->
-                      <a href="#" class="metric metric-bordered">
+                      <span href="#" class="metric metric-bordered">
                         <div class="metric-badge">
                           <span class="badge badge-lg badge-success"><span class="oi oi-media-record pulse mr-1"></span> Students </span>
                         </div>
                         <p class="metric-value h3">
-                          <sub><i class="oi oi-timer"></i></sub> <span class="value">8</span>
+                          <sub><i class="oi oi-timer"></i></sub> <span class="value">{{$students}}</span>
                         </p>
-                      </a> <!-- /.metric -->
+                      </span> <!-- /.metric -->
                     </div><!-- /metric column -->
                   </div>
 @endsection

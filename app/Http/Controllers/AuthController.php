@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\PasswordReset;
 use App\Models\Student;
+use App\Models\Test;
 use App\Models\TestAssignment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -127,7 +129,11 @@ class AuthController extends Controller
     }
 
     public function adminDashboard(){
-        return view('admin.dashboard');
+        $examiners = User::all()->count();
+        $courses = Course::all()->count();
+        $tests = Test::all()->count();
+        $students = Student::all()->count();
+        return view('admin.dashboard', compact('examiners', 'courses', 'tests', 'students' ));
     }
 
     public function logout(Request $request){
