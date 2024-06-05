@@ -7,8 +7,7 @@
             <button class="hamburger hamburger-squeeze mr-2" type="button" data-toggle="aside-menu" aria-label="toggle aside menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /toggle aside menu -->
             <a href="index.html">
               
-             <img class="rounded" src="{{url('assets/abduh.png')}}" alt="" height="50" width="50">
-            
+             <img class="rounded" src="{{url('assets/abduh.png')}}" alt="" height="50" width="50">          
             
             </a>
           </div><!-- /.top-bar-brand -->
@@ -41,14 +40,15 @@
                   <div class="dropdown-arrow d-lg-none" x-arrow=""></div>
                   <div class="dropdown-arrow ml-3 d-none d-lg-block"></div>
                   
-                  <h6 class="dropdown-header d-none d-md-block d-lg-none"> Beni Arisandi </h6><a class="dropdown-item" href="#"><span class="dropdown-icon oi oi-person"></span> Profile</a> <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><span class="dropdown-icon oi oi-account-logout"></span>
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="get" class="d-none">
-                                        @csrf
-                                    </form>
+                  <h6 class="dropdown-header d-none d-md-block d-lg-none"> Beni Arisandi </h6>
+                   <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();"><span class="dropdown-icon oi oi-account-logout"></span>
+                            {{ __('Logout') }}
+                        </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="get" class="d-none">
+                      @csrf
+                  </form>
                   
                 
                   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
