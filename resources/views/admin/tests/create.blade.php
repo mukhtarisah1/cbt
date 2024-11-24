@@ -42,7 +42,7 @@
                             <tr>
                                 <th >Name</th>
                                 <th >Duration</th>
-                                <th>Questions</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -50,6 +50,7 @@
                                 <tr>
                                     <td>{{ $test->title }}</td>
                                     <td >{{ $test->duration }} minutes</td>
+                                    
                                     
                                 </tr>
                             @endforeach

@@ -107,7 +107,7 @@ public function startTest(Test $test){
     } 
 
     public function submitTestPost(Test $test, Request $request)
-{
+    {
     $studentId = auth()->id(); // Assuming the student is authenticated
     $questions = $request->input('questions', []);
     $totalQuestions = count($questions);

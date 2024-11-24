@@ -51,7 +51,7 @@ use Maatwebsite\Excel\Facades\Excel;
         Route::post('addSubject', [AdminController::class, 'addSubject'])->name('addSubject');
     });
 
-    Route::get('/dashboard', [AuthController::class, 'loadDashboard']);
+    Route::get('/dashboard', [AuthController::class, 'loadDashboard']); 
     Route::middleware(['checkAdmin'])->group(function(){
         Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
         Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
