@@ -1,22 +1,38 @@
-<!-- resources/views/test_questions/edit.blade.php -->
-
-<!-- resources/views/test_questions/create.blade.php -->
-
 @extends('layouts.layout')
 
 @section('content')
 
-    <div class="card">
-        <div class="card-body">
+   
         
-            <h5 class="card-title text-sucsess">Add Question to {{ $test->title }}</h5>
+
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="card-title text-success">Manage Questions for {{ $test->title }} test</h5>
+                <a href="{{ route('courses.tests.show', [$course, $test]) }}" class="btn btn-secondary">
+                    Back to Test
+                </a>
+            </div>
             
+            <!-- Import Questions Section -->
+            <h6>Import Questions</h6>
+            <form action="{{ route('courses.tests.questions.import', [$course, $test]) }}" method="POST" enctype="multipart/form-data" class="mb-4">
+                @csrf
+                <div class="form-group">
+                    <label for="questions_file">Upload Excel File:</label>
+                    <input type="file" class="form-control" name="questions_file" id="questions_file" accept=".xlsx,.csv" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Import Questions</button>
+            </form>
+
+            <hr>
+
+            <!-- Add Individual Question Section -->
+            <h6>Add Individual Question</h6>
             <form action="{{ route('courses.tests.questions.store', [$course, $test]) }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="question">Question:</label>
-                    
-                    <textarea class=" form-control" id="editor" style="height: 200px;" name="question" required>{{ old('question') }}</textarea>
+                    <textarea class="form-control" id="editor" style="height: 200px;" name="question" required>{{ old('question') }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="option_a">Option A:</label>
@@ -38,12 +54,11 @@
                     <label for="correct_answer">Correct Answer:</label>
                     <input type="text" class="form-control" name="correct_answer" value="{{ old('correct_answer') }}" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Question</button>
+                <button type="submit" class="btn btn-success">Add Question</button>
             </form>
         </div>
     </div>
 
-    
     <script>
         var quill = new Quill('#editor', {
             theme: 'snow',
@@ -85,7 +100,5 @@
             console.log(editor.value)
         });
     </script>
+
 @endsection
-
-
-

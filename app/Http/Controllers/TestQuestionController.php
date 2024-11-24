@@ -7,6 +7,9 @@ use App\Models\Course;
 use App\Models\Test;
 use App\Models\TestQuestion;
 use Illuminate\Http\Request;
+use App\Imports\QuestionsImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class TestQuestionController extends Controller
 {
@@ -68,4 +71,29 @@ class TestQuestionController extends Controller
 
         return redirect()->route('courses.tests.show', [$course, $test])->with('success', 'Question deleted successfully');
     }
+
+    public function importQuestions(Request $request, Course $course, Test $test)
+    {
+        //dd(session()->all());
+        $request->validate([
+            'questions_file' => 'required|file|mimes:xlsx,csv',
+        ]);
+    
+        try {
+            Excel::import(new QuestionsImport($test->id), $request->file('questions_file'));
+    
+            return redirect()->route('courses.tests.show', [$course, $test])->with('success', 'Questions imported successfully');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            // Handle validation exceptions from Maatwebsite Excel
+            $failures = $e->failures();
+    
+            return redirect()
+                ->route('courses.tests.show', [$course, $test])->with('error', 'Some rows failed to import. Please check the file.');
+        } catch (\Exception $e) {
+            // Handle general exceptions
+            return redirect()
+                ->route('courses.tests.show', [$course, $test])->with('error', 'An error occurred during the import process. Please try again.');
+        }
+    }
+    
 }

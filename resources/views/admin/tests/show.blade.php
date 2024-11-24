@@ -3,9 +3,32 @@
 @extends('layouts.layout')
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="card">
         <div class="card-body">
-        <a href="{{route('courses.tests.questions.create', ['course' => $course->id, 'test' => $test->id])}}" class="btn btn-success mb-3">Add new question</a>
+        <div class="d-flex justify-content-between align-middle mb-4">
+            <a href="{{route('courses.tests.questions.create', ['course' => $course->id, 'test' => $test->id])}}" class="btn btn-success mb-3">Add new question</a>
+            <a href="{{ route('courses.tests.index', [$course, $test]) }}" class="btn btn-secondary">
+                    Back to All Test
+            </a>
+        </div>
+        
             <h5 class="card-title">Test Details</h5>
             
             <p><strong>Test Name:</strong> {{ $test->title }}</p>
@@ -13,6 +36,7 @@
             <p><strong>Test Description:</strong> {{ $test->description }}</p>
         </div>
     </div>
+   
 
     @if($test->questions->count() > 0)
         <div class="card mt-4">

@@ -52,7 +52,7 @@ use Maatwebsite\Excel\Facades\Excel;
     });
 
     Route::get('/dashboard', [AuthController::class, 'loadDashboard']); 
-    Route::middleware(['checkAdmin'])->group(function(){
+    Route::middleware(['web','checkAdmin'])->group(function(){
         Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
         Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
         Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
@@ -122,6 +122,9 @@ use Maatwebsite\Excel\Facades\Excel;
             $pdf = Pdf::loadView('results.pdf', compact('test', 'course', 'results'));
             return $pdf->download('results.pdf');
         })->name('results.export.pdf');
+
+
+        Route::post('/courses/{course}/tests/{test}/questions/import', [TestQuestionController::class, 'importQuestions'])->name('courses.tests.questions.import');
     });
     
 
