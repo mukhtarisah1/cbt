@@ -71,7 +71,7 @@ class TestController extends Controller
     public function destroy(Course $course, Test $test)
     {
         // Delete the test
-        $test->delete();
+        $test->delete(); 
 
         return redirect()->route('courses.tests.index', $course);
     }

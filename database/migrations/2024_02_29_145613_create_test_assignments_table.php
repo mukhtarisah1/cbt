@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('test_assignments', function (Blueprint $table) {
-           $table->id();
-        $table->unsignedBigInteger('test_id');
+        $table->id();
+        $table->foreignId('test_id')->constrained('tests')->onDelete('cascade');
         $table->unsignedBigInteger('student_id');
         $table->boolean('active')->nullable()->default(true);
         $table->timestamps();
